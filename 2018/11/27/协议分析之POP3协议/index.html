@@ -274,7 +274,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.6k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.7k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -403,8 +403,11 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="一、实验原理："><a href="#一、实验原理：" class="headerlink" title="一、实验原理："></a>一、实验原理：</h1><p><strong>POP3</strong>，全名为“Post Office Protocol - Version3”，即“<a href="https://baike.baidu.com/item/%E9%82%AE%E5%B1%80%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">邮局协议</a>版本3”。是<a href="https://baike.baidu.com/item/TCP%2FIP" target="_blank" rel="noopener">TCP/IP</a>协议族中的一员，由<a href="https://baike.baidu.com/item/RFC" target="_blank" rel="noopener">RFC</a>1939定义。本协议主要用于支持使用客户端远程管理在<a href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/100571" target="_blank" rel="noopener">服务器</a>上的电子邮件。提供了<a href="https://baike.baidu.com/item/SSL" target="_blank" rel="noopener">SSL</a>加密的POP3协议被称为POP3S。</p>
-<p><strong>POP协议</strong>支持“离线”邮件处理。其具体过程是：邮件发送到服务器上，电子<a href="https://baike.baidu.com/item/%E9%82%AE%E4%BB%B6%E5%AE%A2%E6%88%B7%E7%AB%AF" target="_blank" rel="noopener">邮件客户端</a>调用邮件客户机程序以连接服务器，并下载所有未阅读的电子邮件。这种离线访问模式是一种存储转发服务，将邮件从<a href="https://baike.baidu.com/item/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/985736" target="_blank" rel="noopener">邮件服务器</a>端送到个人终端机器上，一般是PC机或<br>MAC。一旦邮件发送到 PC<br>机或<a href="https://baike.baidu.com/item/MAC" target="_blank" rel="noopener">MAC</a>上，邮件服务器上的邮件将会被删除。但目前的POP3邮件服务器大都可以“只下载邮件，服务器端并不删除”，也就是改进的POP3协议。</p>
+        <blockquote>
+<p>本报告搭建了POP3服务器和SMTP服务器，对其进行了简单的流量分析，并且简单总结了其异同。</p>
+</blockquote>
+<h1 id="一、实验原理："><a href="#一、实验原理：" class="headerlink" title="一、实验原理："></a>一、实验原理：</h1><p><strong>POP3</strong>，全名为“Post Office Protocol - Version3”，即“<a href="https://baike.baidu.com/item/%E9%82%AE%E5%B1%80%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">邮局协议</a>版本3”。是<a href="https://baike.baidu.com/item/TCP%2FIP" target="_blank" rel="noopener">TCP/IP</a>协议族中的一员，由<a href="https://baike.baidu.com/item/RFC" target="_blank" rel="noopener">RFC</a>1939定义。本协议主要用于支持使用客户端远程管理在<a href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/100571" target="_blank" rel="noopener">服务器</a>上的电子邮件。提供了<a href="https://baike.baidu.com/item/SSL" target="_blank" rel="noopener">SSL</a>加密的POP3协议被称为POP3S。</p>
+<p><strong>POP协议</strong>支持“离线”邮件处理。其具体过程是：邮件发送到服务器上，电子<a href="https://baike.baidu.com/item/%E9%82%AE%E4%BB%B6%E5%AE%A2%E6%88%B7%E7%AB%AF" target="_blank" rel="noopener">邮件客户端</a>调用邮件客户机程序以连接服务器，并下载所有未阅读的电子邮件。这种离线访问模式是一种存储转发服务，将邮件从<a href="https://baike.baidu.com/item/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/985736" target="_blank" rel="noopener">邮件服务器</a>端送到个人终端机器上，一般是PC机或MAC。一旦邮件发送到 PC机或<a href="https://baike.baidu.com/item/MAC" target="_blank" rel="noopener">MAC</a>上，邮件服务器上的邮件将会被删除。但目前的POP3邮件服务器大都可以“只下载邮件，服务器端并不删除”，也就是改进的POP3协议。</p>
 <h1 id="二、实验目的："><a href="#二、实验目的：" class="headerlink" title="二、实验目的："></a>二、实验目的：</h1><p>利用开源软件ewomail搭建自己的邮件服务器并且对其流量进行分析。</p>
 <h1 id="三、实验内容："><a href="#三、实验内容：" class="headerlink" title="三、实验内容："></a>三、实验内容：</h1><h2 id="1、选择环境"><a href="#1、选择环境" class="headerlink" title="1、选择环境"></a>1、选择环境</h2><p>在这里我使用了开源软件EwoMail邮件服务器软件进行邮件服务器搭建。EwoMail是基于Linux的开源邮件服务器软件，集成了众多优秀稳定的组件，是一个快速部署、简单高效、多语言、安全稳定的邮件解决方案，帮助你提升运维效率，降低<br>IT 成本，兼容主流的邮件客户端，同时支持电脑和手机邮件客户端。</p>
 <p>我认为这个软件很适合用来搭建邮件服务器，原因有以下三点：</p>
@@ -505,7 +508,7 @@ height:50vh;
             <p>原文作者：<a href="http://ciaofox.me">CiaoFox</a>
             </p><p>原文链接：<a href="http://ciaofox.me/2018/11/27/协议分析之POP3协议/">http://ciaofox.me/2018/11/27/协议分析之POP3协议/</a>
             </p><p>发表日期：<a href="http://ciaofox.me/2018/11/27/协议分析之POP3协议/">November 27th 2018, 1:03:32 pm</a>
-            </p><p>更新日期：<a href="http://ciaofox.me/2018/11/27/协议分析之POP3协议/">April 1st 2019, 6:06:49 pm</a>
+            </p><p>更新日期：<a href="http://ciaofox.me/2018/11/27/协议分析之POP3协议/">April 1st 2019, 6:10:43 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -686,9 +689,16 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 4
+        Total : 5
         </div>
         <!-- search  -->
         
@@ -701,6 +711,11 @@ top:50vh;
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/11</span><a class="archive-post-title" href="/2018/12/11/协议分析之FTP协议/">协议分析之FTP协议</a>
+        </li>
     
     
         <li class="archive-post-item">

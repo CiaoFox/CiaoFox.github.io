@@ -274,7 +274,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.7k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.7k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -426,11 +426,8 @@ height:50vh;
 <p>这里有一个坑一定要记得，centos安装时候默认不开启网络的，需要手动打开。如果错过了这一步，那只有等安装好之后用命令好修改打开，十分麻烦（我在这一步上一直出错）。</p>
 <p><img src="/2018/11/27/协议分析之POP3协议/a99489ab4f69dc90fca36fea578aced7.png" alt=""></p>
 <p>在这里贴上如果忘记打开网络，命令行的做法。</p>
-<p><strong><em>1.打开网络配置文件</em></strong></p>
-<p>vi /etc/sysconfig/network-scripts/ifcfg-eth0</p>
-<p><strong><em>2.在文件末尾追加DNS</em></strong></p>
-<p>DNS1=8.8.8.8</p>
-<p>DNS2=4.2.2.2</p>
+<p><strong><em>1.打开网络配置文件</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-eth0</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>2.在文件末尾追加DNS</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DNS1=8.8.8.8</span><br><span class="line"></span><br><span class="line">DNS2=4.2.2.2</span><br></pre></td></tr></table></figure></p>
 <p><strong><em>3.重启网络</em></strong></p>
 <p>ifup eth0</p>
 <p><img src="/2018/11/27/协议分析之POP3协议/cfbe0f65ad3f6c1413b7f31d5bcd0332.png" alt=""></p>
@@ -439,26 +436,21 @@ height:50vh;
 <p><img src="/2018/11/27/协议分析之POP3协议/f554ba4f41a9cfd37857500952704cb9.png" alt=""></p>
 <p>这里需要注意的是，centos在命令行下好像没法粘贴复制，所以需要手打。</p>
 <p><img src="/2018/11/27/协议分析之POP3协议/f345d0f6fcb136c314b44ecc06de4ed5.png" alt=""></p>
-<p>注意空格。</p>
-<p>yum groupinstall “GNOME Desktop” “Graphical Administration Tools”</p>
+<p>注意空格。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall &quot;GNOME Desktop&quot; &quot;Graphical Administration Tools&quot;</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2018/11/27/协议分析之POP3协议/a0b2922e1a0191977ae0da36156ffcb3.png" alt=""></p>
-<p>完成之后我们用另一个指令打开图形界面。</p>
-<p>ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target </p>
-<p>startx</p>
+<p>完成之后我们用另一个指令打开图形界面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target </span><br><span class="line"></span><br><span class="line">startx</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2018/11/27/协议分析之POP3协议/9d4501321d2fcd10e0c12ac88861636a.png" alt=""></p>
 <p>成功。</p>
 <p>安装ewomail</p>
 <p>参考文档：<a href="http://doc.ewomail.com/docs/ewomail/jianjie" target="_blank" rel="noopener">http://doc.ewomail.com/docs/ewomail/jianjie</a></p>
-<h3 id="关闭selinux"><a href="#关闭selinux" class="headerlink" title="关闭selinux"></a>关闭selinux</h3><p>vi /etc/sysconfig/selinux</p>
+<h3 id="关闭selinux"><a href="#关闭selinux" class="headerlink" title="关闭selinux"></a>关闭selinux</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/selinux</span><br></pre></td></tr></table></figure>
 <p>SELINUX=enforcing 改为 SELINUX=disabled</p>
 <p><img src="/2018/11/27/协议分析之POP3协议/628288bfab998bcc1ec0a42872597c18.png" alt=""></p>
 <h3 id="检查swap"><a href="#检查swap" class="headerlink" title="检查swap"></a>检查swap</h3><p>如果没启动swap，这会导致EwoMail的防病毒组件不能启动，所以在安装前先检查swap是否已经启动，如已启动可跳过该步骤。</p>
-<p>查看swap</p>
-<p>free -m</p>
+<p>查看swap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2018/11/27/协议分析之POP3协议/e3a447a1b4e95c24922f57f517bfa817.png" alt=""></p>
 <h3 id="邮箱域名"><a href="#邮箱域名" class="headerlink" title="邮箱域名"></a>邮箱域名</h3><p>EwoMail本身是可以配置多个域名来收发邮件的，但在安装前需要一个邮箱的主域名。<br>本次教程例子使用的主域名是ciaofox.cn</p>
-<p>查看当前主机名</p>
-<p>hostname -f</p>
+<p>查看当前主机名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname -f</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2018/11/27/协议分析之POP3协议/9853381c841004fc66f0b23d23ad618e.png" alt=""></p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装前请服务器必须已链接网络，安装时间将会根据你的系统配置和网络环境大概会在10分钟内安装完成。（需要root权限）</p>
 <p>打开：<a href="http://www.ewomail.com/list-11.html" target="_blank" rel="noopener">http://www.ewomail.com/list-11.html</a> 输入你的域名获取安装代码</p>
@@ -475,7 +467,8 @@ height:50vh;
 <p><img src="/2018/11/27/协议分析之POP3协议/3e6f6a419393abb0a49200ccab8694bf.png" alt=""></p>
 <p>可以看到POP协议的内容，和我们得到的东西很接近。那么我们再查看流量包，尤其是TCP协议。</p>
 <p><img src="/2018/11/27/协议分析之POP3协议/5ae1867f5f19cf0a4f413493261e81e6.png" alt=""></p>
-<p>从这里我们可以看出TCP<br>的三次握手，对110端口。连接建立之后返回了一个POP报文，内容是+OK Welcome to<br>coremail Mail Pop3 Server (163coms[b62aaa251425b4be4eaec4ab4744cf47s])</p>
+<p>从这里我们可以看出TCP<br>的三次握手，对110端口。连接建立之后返回了一个POP报文，内容是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+OK Welcome to coremail Mail Pop3 Server(163coms[b62aaa251425b4be4eaec4ab4744cf47s])</span><br></pre></td></tr></table></figure>
 <p><img src="/2018/11/27/协议分析之POP3协议/946903ad6dc87ea08022256aa8eab7fa.png" alt=""></p>
 <p><img src="/2018/11/27/协议分析之POP3协议/896a102544b6d38ffb0b50d0b7296542.png" alt=""></p>
 <p>接下来我们尝试登陆163邮箱（账号来自于别人），得到了明文的报文。</p>
@@ -487,8 +480,7 @@ height:50vh;
 <p>总结：可以看出POP3协议在登陆时会先进行身份验证，即账号和密码。验证之后可以通过发送对应指令获得所有未读信息到主机，完成登陆与邮件的获取。从抓到的包中可以看出几点，1，它是通过一个字符一个字符地上传。2，密码与账号都是通过明文上传。</p>
 <h1 id="SMTP协议分析"><a href="#SMTP协议分析" class="headerlink" title="SMTP协议分析"></a>SMTP协议分析</h1><p><img src="/2018/11/27/协议分析之POP3协议/60f54a21d1e368a9aa4c27836c2fe4aa.png" alt=""></p>
 <p><img src="/2018/11/27/协议分析之POP3协议/2e2c2adbd729ec40af2e9ac43c0f9a65.png" alt=""></p>
-<p>一样的方法，可以看出是先经过TCP3次握手再传送回SMTP报文。</p>
-<p>220 163.com Anti-spam GT for Coremail System (163com[20141201])</p>
+<p>一样的方法，可以看出是先经过TCP3次握手再传送回SMTP报文。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">220 163.com Anti-spam GT for Coremail System (163com[20141201])</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2018/11/27/协议分析之POP3协议/3e958330196fe96c56f0c267a218ce6c.png" alt=""></p>
 <p>helo 和ehlo指令的作用是向服务器标示用户身份，返回邮件服务器身份。</p>
 <p>输入auth login验证用户（验证用户使用auth<br>login进行验证时用户名和密码是经过base64编码过后的字符）</p>
@@ -508,7 +500,7 @@ height:50vh;
             <p>原文作者：<a href="http://ciaofox.me">CiaoFox</a>
             </p><p>原文链接：<a href="http://ciaofox.me/2018/11/27/协议分析之POP3协议/">http://ciaofox.me/2018/11/27/协议分析之POP3协议/</a>
             </p><p>发表日期：<a href="http://ciaofox.me/2018/11/27/协议分析之POP3协议/">November 27th 2018, 1:03:32 pm</a>
-            </p><p>更新日期：<a href="http://ciaofox.me/2018/11/27/协议分析之POP3协议/">April 1st 2019, 6:10:43 pm</a>
+            </p><p>更新日期：<a href="http://ciaofox.me/2018/11/27/协议分析之POP3协议/">February 26th 2020, 2:27:28 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -716,8 +708,6 @@ top:50vh;
     
     
     
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 7
@@ -785,9 +775,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="软件"><span class="iconfont-archer">&#xe606;</span>软件</span>
     
-        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
-    
         <span class="sidebar-tag-name" data-tags="协议分析"><span class="iconfont-archer">&#xe606;</span>协议分析</span>
+    
+        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
     
         <span class="sidebar-tag-name" data-tags="渗透记录"><span class="iconfont-archer">&#xe606;</span>渗透记录</span>
     

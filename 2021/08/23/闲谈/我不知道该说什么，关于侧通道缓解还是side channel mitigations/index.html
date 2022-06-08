@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>我不知道该说什么，关于侧通道缓解还是side channel mitigations | CiaoFox</title>
+    
+    
+        <meta name="keywords" content="原理分析" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="在新配置的电脑中安装vmware并装上虚拟机之后，出现了“您正在运行的此虚拟机已启用侧通道缓解。侧通道缓解可增强安全性，但也会降低性能。”的一个提示，这勾起了我的好奇心。而在中文网络上搜索了一下发现没有太多可以参考的内容，于是决定自己搜集一下资料做个小总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我不知道该说什么，关于侧通道缓解还是side channel mitigations">
+<meta property="og:url" content="http://ciaofox.me/2021/08/23/%E9%97%B2%E8%B0%88/%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E8%AF%A5%E8%AF%B4%E4%BB%80%E4%B9%88%EF%BC%8C%E5%85%B3%E4%BA%8E%E4%BE%A7%E9%80%9A%E9%81%93%E7%BC%93%E8%A7%A3%E8%BF%98%E6%98%AFside%20channel%20mitigations/index.html">
+<meta property="og:site_name" content="CiaoFox">
+<meta property="og:description" content="在新配置的电脑中安装vmware并装上虚拟机之后，出现了“您正在运行的此虚拟机已启用侧通道缓解。侧通道缓解可增强安全性，但也会降低性能。”的一个提示，这勾起了我的好奇心。而在中文网络上搜索了一下发现没有太多可以参考的内容，于是决定自己搜集一下资料做个小总结。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200812112427852.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW55dW4xOTky,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://i0.wp.com/windowsloop.com/wp-content/uploads/2021/01/vmware-side-channel-mitigation-message-190121-1.jpg?w=340&ssl=1">
+<meta property="article:published_time" content="2021-08-23T02:46:19.000Z">
+<meta property="article:modified_time" content="2022-03-15T09:26:35.971Z">
+<meta property="article:author" content="CiaoFox">
+<meta property="article:tag" content="原理分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200812112427852.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW55dW4xOTky,size_16,color_FFFFFF,t_70#pic_center">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="CiaoFox" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">CiaoFox</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">时间线</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">时间线</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.jpg" />
+            <h2 id="name">ciaofox</h2>
+            <h3 id="title">infosec engineer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>New Eden</span>
+            <a id="follow" target="_blank" href="https://github.com/ciaofox/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                29
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                10
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/ciaofox/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>分类</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            400 Execution 攻击
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/10/31/400%20Execution%20%E6%94%BB%E5%87%BB/%E6%B8%97%E9%80%8F%E8%AE%B0%E5%BD%95%E4%B9%8B%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86/">渗透记录之路径遍历</a></li>  <li class="file"><a href="/2019/09/22/400%20Execution%20%E6%94%BB%E5%87%BB/PHPMyWind%E5%AD%98%E5%82%A8XSS%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2017-12984%EF%BC%89/">PHPMyWind存储XSS漏洞（CVE-2017-12984）</a></li>  <li class="file"><a href="/2019/10/11/400%20Execution%20%E6%94%BB%E5%87%BB/windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2019-0708%EF%BC%89/">windows远程桌面漏洞(CVE-2019-0708)</a></li>  <li class="file"><a href="/2020/03/03/400%20Execution%20%E6%94%BB%E5%87%BB/Apache%20Tomcat%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2020-1938%EF%BC%89/">Apache Tomcat文件包含漏洞（CVE-2020-1938）</a></li>  <li class="file"><a href="/2021/12/13/400%20Execution%20%E6%94%BB%E5%87%BB/%E9%9B%AA%E5%B4%A9-log4j%E6%BC%8F%E6%B4%9E%E7%B2%97%E8%B0%88/">雪崩-log4j漏洞粗谈</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            600 Privilege Escalation 权限提升
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/09/25/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/Ubuntu%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%EF%BC%88CVE-2017-16995%EF%BC%89/">Ubuntu本地提权（CVE-2017-16995）</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            LeetCode
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/10/25/LeetCode/%E6%A8%A1%E6%9D%BF/">模板</a></li>  <li class="file"><a href="/2022/05/04/LeetCode/1.%20Two%20Sum/">1. Two Sum</a></li>  <li class="file"><a href="/2022/05/04/LeetCode/26.%20Remove%20Duplicates%20from%20Sorted%20Array/">26. Remove Duplicates from Sorted Array</a></li>  <li class="file"><a href="/2022/05/05/LeetCode/27.%20Remove%20Element/">27. Remove Element</a></li>  <li class="file"><a href="/2022/05/06/LeetCode/66.%20Plus%20One/">66. Plus One</a></li>  <li class="file"><a href="/2022/05/06/LeetCode/35.%20Search%20Insert%20Position/">35. Search Insert Position</a></li>  <li class="file"><a href="/2022/05/07/LeetCode/456.%20132%20Pattern/">456. 132 Pattern</a></li>  <li class="file"><a href="/2022/05/08/LeetCode/53.%20Maximum%20Subarray/">53. Maximum Subarray</a></li>  <li class="file"><a href="/2022/05/08/LeetCode/341.%20Flatten%20Nested%20List%20Iterator/">341. Flatten Nested List Iterator</a></li>  <li class="file"><a href="/2022/05/25/LeetCode/2248.%20Intersection%20of%20Multiple%20Arrays/">2248. Intersection of Multiple Arrays</a></li>  <li class="file"><a href="/2022/05/26/LeetCode/191.%20Number%20of%201%20Bits/">191. Number of 1 Bits</a></li>  <li class="file"><a href="/2022/05/27/LeetCode/1342.%20Number%20of%20Steps%20to%20Reduce%20a%20Number%20to%20Zero/">1342. Number of Steps to Reduce a Number to Zero</a></li>  <li class="file"><a href="/2022/05/29/LeetCode/268.%20Missing%20Number/">268. Missing Number</a></li>  <li class="file"><a href="/2022/05/30/LeetCode/463.%20Island%20Perimeter/">463. Island Perimeter</a></li>  <li class="file"><a href="/2022/05/31/LeetCode/1773.%20Count%20Items%20Matching%20a%20Rule/">1773. Count Items Matching a Rule</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            协议分析
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/10/16/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E4%B9%8Bwireshark%E5%88%9D%E6%AC%A1%E6%8A%93%E5%8C%85/">协议分析之wireshark初次抓包</a></li>  <li class="file"><a href="/2018/10/25/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E4%B9%8B%E6%B5%81%E9%87%8F%E6%8A%93%E5%8F%96/">协议分析之流量抓取</a></li>  <li class="file"><a href="/2018/11/27/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E4%B9%8BPOP3%E5%8D%8F%E8%AE%AE/">协议分析之POP3协议与SMTP协议</a></li>  <li class="file"><a href="/2018/12/11/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E4%B9%8BFTP%E5%8D%8F%E8%AE%AE/">协议分析之FTP协议</a></li>  <li class="file"><a href="/2018/12/25/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E4%B9%8BMQTT%E5%8D%8F%E8%AE%AE/">协议分析之MQTT协议</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            安全运营
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/SOAR%EF%BC%8CSOC%E5%92%8C%E5%AE%89%E5%85%A8/">SOAR，SOC和安全</a></li>  <li class="file"><a href="/2022/05/20/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/%E5%B0%91%E6%95%B0%E6%B4%BE%E6%8A%A5%E5%91%8A-%E5%85%B3%E4%BA%8E%E5%9B%BA%E4%BB%B6%EF%BC%8C%E7%AD%89%E4%BF%9D%E4%B8%8E%E5%AE%89%E5%85%A8/">少数派报告-关于固件，等保与安全</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            闲谈
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2021/08/23/%E9%97%B2%E8%B0%88/%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E8%AF%A5%E8%AF%B4%E4%BB%80%E4%B9%88%EF%BC%8C%E5%85%B3%E4%BA%8E%E4%BE%A7%E9%80%9A%E9%81%93%E7%BC%93%E8%A7%A3%E8%BF%98%E6%98%AFside%20channel%20mitigations/">我不知道该说什么，关于侧通道缓解还是side channel mitigations</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title"><span>标签</span></h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/" rel="tag">协议分析</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" rel="tag">原理分析</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/" rel="tag">安全运营</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/" rel="tag">提权漏洞</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" rel="tag">漏洞复现</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86/" rel="tag">路径遍历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/" rel="tag">远程代码执行</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-闲谈/我不知道该说什么，关于侧通道缓解还是side channel mitigations" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E9%97%B2%E8%B0%88/">闲谈</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" rel="tag">原理分析</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/08/23/%E9%97%B2%E8%B0%88/%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E8%AF%A5%E8%AF%B4%E4%BB%80%E4%B9%88%EF%BC%8C%E5%85%B3%E4%BA%8E%E4%BE%A7%E9%80%9A%E9%81%93%E7%BC%93%E8%A7%A3%E8%BF%98%E6%98%AFside%20channel%20mitigations/">
+            <time datetime="2021-08-23T02:46:19.000Z" itemprop="datePublished">2021-08-23</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            我不知道该说什么，关于侧通道缓解还是side channel mitigations
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在新配置的电脑中安装vmware并装上虚拟机之后，出现了“您正在运行的此虚拟机已启用侧通道缓解。侧通道缓解可增强安全性，但也会降低性能。”的一个提示，这勾起了我的好奇心。而在中文网络上搜索了一下发现没有太多可以参考的内容，于是决定自己搜集一下资料做个小总结。</p>
+<p>在进入正题之前，首先额外说一个小坑，是关于开启amd-v虚拟化的提示，不开启的话无法使用虚拟机，提示如下：</p>
+<blockquote>
+<p>此主机支持 AMD-V，但 AMD-V 处于禁用状态。<br>如果已在 BIOS/固件设置中禁用 AMD-V，或主机自更改此设置后从未重新启动，则 AMD-V 可能被禁用。<br>(1) 确认 BIOS/固件设置中启用了 AMD-V。<br>(2) 如果此 BIOS/固件设置已更改，请重新启动主机。<br>(3) 如果您在安装 VMware Workstation 之后从未重新启动主机，请重新启动。<br>(4) 将主机的 BIOS/固件更新至最新版本。<br>此主机不支持“AMD RVI”硬件辅助的 MMU 虚拟化。<br>模块“CPUIDEarly”启动失败。<br>未能启动虚拟机。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200812112427852.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW55dW4xOTky,size_16,color_FFFFFF,t_70#pic_center" alt="这里用一下csdn的图"></p>
+<p>在AMD-V上我折腾了一阵子，主要是开启SVM功能之后整个物理机变得非常不稳定，时不时蓝屏。最后在关闭了Hyper-V后解决了这些问题。</p>
+<p>说回到主题，在vmware中每次打开虚拟机都会出现一个提示：</p>
+<blockquote>
+<p>您正在运行的此虚拟机已启用侧通道缓解。侧通道缓解可增强安全性，但也会降低性能。<br>要禁用缓解，请在虚拟机设置的“高级”面板中更改侧通道缓解设置。有关更多详细信息，请参阅 VMware 知识库文章 79832，网址为 <a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/79832%E3%80%82">https://kb.vmware.com/s/article/79832。</a></p>
+</blockquote>
+<p><img src="https://i0.wp.com/windowsloop.com/wp-content/uploads/2021/01/vmware-side-channel-mitigation-message-190121-1.jpg?w=340&ssl=1" alt="这里再用一下windowsloop的图"></p>
+<p>可以看出中英文的区别，中文更接近于机翻（习惯了，vmware的官网知识库都是机翻的），其中的”侧信道缓解”在英文中是”side channel mitigations”，大家都反馈<a target="_blank" rel="noopener" href="https://m.mysmth.net/article/LinuxApp/952624?p=2" title="我也是这么觉得">“每个词都没错，但不是最佳选择，凑一块语法也不对。就是不知所云，不走心的机翻的感觉。”</a>我也觉得翻译为<strong>侧信道攻击缓解措施</strong>更贴切。</p>
+<p>接下来的内容我会以问答形式来表达。</p>
+<h2 id="Q：什么是侧信道攻击？"><a href="#Q：什么是侧信道攻击？" class="headerlink" title="Q：什么是侧信道攻击？"></a>Q：什么是侧信道攻击？</h2><p>在这里我们使用wikipedia上的定义，<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%97%81%E8%B7%AF%E6%94%BB%E5%87%BB">在密码学中，旁道攻击又称侧信道攻击、边信道攻击（英语：Side-channel attack）是一种攻击方式，它基于从密码系统的物理实现中获取的信息而非暴力破解法或是算法中的理论性弱点（较之密码分析）。例如：时间信息、功率消耗、电磁泄露或甚是声音可以提供额外的信息来源，这可被利用于对系统的进一步破解。某些侧信道攻击还要求攻击者有关于密码系统内部操作的技术性信息，不过，其他诸如差分电力分析的方法在黑盒攻击中效果明显。许多卓有成效的侧信道攻击基于由保罗·科切开拓的统计学方法。</a></p>
+<h2 id="Q：侧信道攻击有什么类型？"><a href="#Q：侧信道攻击有什么类型？" class="headerlink" title="Q：侧信道攻击有什么类型？"></a>Q：侧信道攻击有什么类型？</h2><blockquote>
+<p>根据借助的介质，旁路攻击分为多个大类，包括：</p>
+<ul>
+<li>缓存攻击，通过获取对缓存的访问权而获取缓存内的一些敏感信息，例如攻击者获取云端主机物理主机的访问权而获取存储器的访问权；</li>
+<li>计时攻击，通过设备运算的用时来推断出所使用的运算操作，或者通过对比运算的时间推定资料位于哪个存储设备，或者利用通信的时间差进行资料窃取;</li>
+<li>基于功耗监控的旁路攻击，同一设备不同的硬件电路单元的运作功耗也是不一样的，因此一个程序运行时的功耗会随着程序使用哪一种硬件电路单元而变动，据此推断出资料输出位于哪一个硬件单元，进而窃取资料；  </li>
+<li>电磁攻击，设备运算时会泄漏电磁辐射，经过得当分析的话可解析出这些泄漏的电磁辐射中包含的信息（比如文本、声音、图像等），这种攻击方式除了用于密码学攻击以外也被用于非密码学攻击等窃听行为，如TEMPEST攻击（例如范·埃克窃听、辐射监测）；  </li>
+<li>声学密码分析，通过捕捉设备在运算时泄漏的声学信号捉取信息（与功率分析类似）；  </li>
+<li>差别错误分析，隐密资料在程序运行发生错误并输出错误信息时被发现；  </li>
+<li>数据残留，可使理应被删除的敏感资料被读取出来（例如冷启动攻击）；  </li>
+<li>软件初始化错误攻击，现时较为少见，行锤攻击是该类攻击方式的一个实例，在这种攻击实现中，被禁止访问的存储器位置旁边的存储器空间如果被频繁访问将会有状态保留丢失的风险；  </li>
+<li>光学方式，即隐密资料被一些视觉光学仪器（如高清晰度相机、高清晰度摄影机等设备）捕捉。<br>所有的攻击类型都利用了加密/解密系统在进行加密/解密操作时算法逻辑没有被发现缺陷，但是通过物理效应提供了有用的额外信息（这也是称为“旁路”的缘由），而这些物理信息往往包含了密钥、密码、密文等隐密资料。</li>
+</ul>
+</blockquote>
+<h2 id="Q：侧信道攻击有什么例子？"><a href="#Q：侧信道攻击有什么例子？" class="headerlink" title="Q：侧信道攻击有什么例子？"></a>Q：侧信道攻击有什么例子？</h2><p>在vmware中给的那个<a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/79832">链接</a>里我们可以看到这么一句:</p>
+<blockquote>
+<p>The root cause of the performance degradation is most likely due to mitigations for side channel attacks such as Spectre and Meltdown. </p>
+</blockquote>
+<p>我们就以<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B9%BD%E7%81%B5%E6%BC%8F%E6%B4%9E">Spectre</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%86%94%E6%AF%81_(%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E)">Meltdown</a>为例。</p>
+<h2 id="Spectre"><a href="#Spectre" class="headerlink" title="Spectre"></a>Spectre</h2><p>幽灵（英语：Spectre）是一个存在于分支预测实现中的硬件缺陷及安全漏洞，含有预测执行功能的现代微处理器均受其影响，漏洞利用是基于时间的旁路攻击，允许恶意进程获得其他程序在映射内存中的资料内容。Spectre是一系列的漏洞，基于攻击行为类型，赋予了两个通用漏洞披露ID，分别是CVE-2017-5753（bounds check bypass，边界检查绕过）和CVE-2017-5715（branch target injection，分支目标注入），于2018年1月随同另一个也基于推测运行机制的、属于重量级信息安全漏洞的硬件缺陷“Meltdown”（熔毁）一同公布。由于该缺陷是推测运行机制导致的，加上不同处理器架构对推测运行又有不同的实现方式，因此这个缺陷无法获得根源上的修复而只能采取“见招拆招”式的方法防范，而且因机制所致，各种解决方案还有不可预料的性能下降。</p>
+<p>CVE-2017-5753依赖于运行中的即时编译（JIT）系统，用于Javascript的JIT引擎已被发现存在此漏洞。网站可以读取浏览器中存储的另一个网站的数据，或者浏览器本身的内存。对此Firefox 57.0.4（部分）及Chrome 64通过为每个网站分配专用的浏览器进程来阻挡此类攻击；操作系统则是通过改写的编译器重新编译以阻挡利用该漏洞进行攻击的行为。</p>
+<p>针对CVE-2017-5715，除了软件层面上进行修改以外，处理器也需要通过微码更新来阻挡这类攻击。</p>
+<p>随着幽灵缺陷派生的安全漏洞（攻击手段变体，包括CVE-2018-3693、CVE-2018-3640、CVE-2018-3639等）被逐一发现，英特尔等CPU开发商不得不在修复既有缺陷的同时资助第三方信息安全团队继续发掘潜在的缺陷以破财消灾。</p>
+<h2 id="Meltdown"><a href="#Meltdown" class="headerlink" title="Meltdown"></a>Meltdown</h2><p>熔断（英语：Meltdown），也译崩溃，编号CVE-2017-5754，正式名称为“Rogue Data Cache Load”，常译作“恶意数据缓存加载”，是一个存在于英特尔大部分x86/x86-64微处理器、部分IBM POWER架构处理器以及部分ARM架构处理器中的关于推测运行机制的硬件设计缺陷及安全漏洞。该缺陷使得低权限的进程无论是否获取特权，均可以获取受高权限保护的内存空间中的资料，漏洞利用是基于时间的旁路攻击。2018年1月，该缺陷随另一个基于推测运行机制的重量级信息安全漏洞、硬件缺陷“Spectre”（幽灵）在通用漏洞披露中公布。</p>
+<p>由于英特尔处理器及IBM POWER处理器均在市场上占据极大的份额（出现缺陷的ARM处理器在缺陷被发现时尚未正式面市），这种涉及信息安全的硬件缺陷影响范围甚广，包括几乎整个x86、POWER服务器领域、几乎整个小型主机及大型主机市场、个人电脑市场等都无一幸免，另外该缺陷的危险程度之高（无需特权即可访问敏感资料所在的存储器空间），曾一度令信息安全人员及机构怀疑缺陷的真实性，而提前公布这些缺陷还极有可能引发全球性的信息安全灾难，因而选择先与处理器厂商及核心客户联系协商备妥修补方案再另行公布。目前该硬件缺陷可通过软件实现规避，包括Linux系、Android、OS X/macOS、Windows等等都有相应的修复程序（像是Linux的内核页表隔离技术），但是软件规避将导致处理器性能的显著下降。而从根本上修复该缺陷的方法（包括修复“幽灵”缺陷）是重新设计处理器的微架构，为此英特尔、IBM及ARM都将新处理器微架构的推出时程大幅押后。</p>
+<h2 id="Q：开启侧信道攻击缓解措施具体能够对什么攻击生效？"><a href="#Q：开启侧信道攻击缓解措施具体能够对什么攻击生效？" class="headerlink" title="Q：开启侧信道攻击缓解措施具体能够对什么攻击生效？"></a>Q：开启侧信道攻击缓解措施具体能够对什么攻击生效？</h2><p>这是个很有趣的问题，我查遍了整个vmware的知识库（看英文真的好痛苦），也没找到它对自己的这个功能的详细解释。但是<del>勇敢狐狸不怕困难</del>在我的查找下，还是能够从侧面对这个问题做出一些回答的。</p>
+<p>根据vmware知识库<a target="_blank" rel="noopener" href="https://kb.vmware.com/s/article/67577?lang=en_US" title="详情请阅读这个链接">另一篇讲如何缓解MDS漏洞的文章中</a>中，我们可以看到vmware在侧信道攻击方面的防御努力。MDS是一个典型的侧信道攻击，它所涉及的CVE漏洞有CVE-2018-12126、CVE-2018-12127、CVE-2018-12130 和 CVE-2019-11091等。</p>
+<p>而在<a target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/architecture-and-technology/mds.html" title="详情请阅读这个链接">英特尔的这个链接中</a>中,我们可以看到这么一句:</p>
+<blockquote>
+<p>对于那些未能在硬件中解决 MDS 的产品，英特尔将与原始设备制造商 (OEM) 在定期更新的流程中发布处理器微码更新 (MCU)。这些将与操作系统和虚拟机管理程序软件的对应更新相结合。</p>
+</blockquote>
+<p>我觉得可以认为<del>vmware和inter有**交易</del>这个更新已经在vmware中实现了。</p>
+<h2 id="Q：开启侧信道攻击缓解措施是否有必要？"><a href="#Q：开启侧信道攻击缓解措施是否有必要？" class="headerlink" title="Q：开启侧信道攻击缓解措施是否有必要？"></a>Q：开启侧信道攻击缓解措施是否有必要？</h2><p>虽然很多安全观点都是一个仁者见仁智者见智（说人话就是随便你）的问题，但是对于侧信道攻击，我还是觉得它不是一个常规意义上的严重性的漏洞。</p>
+<p>从使用难度上来说，侧信道攻击技术含量很高，这意味着它的使用门槛也很高；从易用性上来说，vmware默认开启这个功能，大部分人不会想着去关闭它，所以即使真有一个能够利用这个漏洞的工具，它也很难找到目标；</p>
+<p>更何况在<a target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/architecture-and-technology/mds.html">英特尔的文章</a>中对于MDS有过这么一个看法：</p>
+<blockquote>
+<p>在研究环境的受控条件外利用 MDS 漏洞是一项复杂的工作。MDS 漏洞已被行业标准的“通用漏洞评分系统 (CVSS)”划分为低到中级严重性，而且值得注意的是，<strong>并没有任何实际利用这些漏洞的报告</strong>。</p>
+</blockquote>
+<p><del>虽然在quore上依然有一些工程师认为侧信道攻击是一个<a target="_blank" rel="noopener" href="https://qr.ae/pGW106" title="我希望你不要问我为什么这个链接打不开">非常被低估的漏洞</a>，但是…你懂的（耸肩）。</del></p>
+<h2 id="Q：开启侧信道攻击缓解措施之后虚拟机性能会下降多少？"><a href="#Q：开启侧信道攻击缓解措施之后虚拟机性能会下降多少？" class="headerlink" title="Q：开启侧信道攻击缓解措施之后虚拟机性能会下降多少？"></a>Q：开启侧信道攻击缓解措施之后虚拟机性能会下降多少？</h2><p>我知道这个问题很多人关心，但是这是个很不好回答的问题…</p>
+<p>在reddit、csdn、博客园、V2EX论坛上，你可以找到一些对于侧信道攻击的吐槽，例如说如果不关闭，自己的虚拟机会非常卡；或是吐槽这个功能会在创建虚拟机时默认开启导致自己每次都要手动关闭（我直接关闭了提示假装它不存在）；也有人说它无关紧要…</p>
+<p>根据在<a target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/architecture-and-technology/mds.html" title="这个链接出现第三次了">英特尔的文章</a>中的解释，MDS的漏洞缓解策略只会影响不到5%的性能，我们有理由相信vmware不会给自己挖一个特别影响性能的坑，所以嘛…还是开着吧。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这个文章写于上班摸鱼期间，大概花费了我一整个下午。如果你读完了全文却依然很迷惑，那你首先不该埋怨我，<del>让我们一起把锅丢给不完整的vmware知识库吧</del>而应该重新理解其中的几个概念：</p>
+<ul>
+<li>side channel mitigations</li>
+<li>侧信道攻击（旁路攻击）</li>
+<li>MDS（Microarchitectural Data Sampling）</li>
+</ul>
+<p>如果依然存有迷惑，欢迎讨论。</p>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/08/25/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/SOAR%EF%BC%8CSOC%E5%92%8C%E5%AE%89%E5%85%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    SOAR，SOC和安全
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2020/03/03/400%20Execution%20%E6%94%BB%E5%87%BB/Apache%20Tomcat%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2020-1938%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Apache Tomcat文件包含漏洞（CVE-2020-1938）</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            CiaoFox &copy; 2022 
+            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

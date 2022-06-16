@@ -336,12 +336,12 @@
     <link href="http://ciaofox.me/2022/03/10/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/DirtyPipe(CVE-2022-0847)/"/>
     <id>http://ciaofox.me/2022/03/10/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/DirtyPipe(CVE-2022-0847)/</id>
     <published>2022-03-10T05:11:23.000Z</published>
-    <updated>2022-06-16T07:38:29.627Z</updated>
+    <updated>2022-06-16T07:51:59.181Z</updated>
     
     <content type="html"><![CDATA[<h1 id="DirtyPipe-CVE-2022-0847"><a href="#DirtyPipe-CVE-2022-0847" class="headerlink" title="DirtyPipe CVE-2022-0847"></a>DirtyPipe CVE-2022-0847</h1><p>漏洞类型：内核提权漏洞</p><p>描述：可以覆盖任意只读文件中的数据，并获得 root 权限。</p><p>漏洞影响范围：5.8 &lt;= Linux 内核版本 &lt; 5.16.11 / 5.15.25 / 5.10.102</p><p>复现环境：5.10.0-kali3-amd64</p><p>参考链接</p><p><a href="https://blog.csdn.net/WWL0814/article/details/123354623">https://blog.csdn.net/WWL0814/article/details/123354623</a></p><p><a href="https://github.com/imfiver/CVE-2022-0847">https://github.com/imfiver/CVE-2022-0847</a></p><h2 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h2><p>使用Dirty-Pipe.sh文件进行提权</p><p>下载链接</p><p><a href="https://github.com/imfiver/CVE-2022-0847">https://github.com/imfiver/CVE-2022-0847</a></p><p>复现步骤</p><p>登录kali普通用户账号，查看下用户</p><p>whoami</p><p><img src="https://raw.githubusercontent.com/virbellez/pigo/master/images/20220310111434.png" alt="20220310111434"></p><p>打开终端下载文件</p><pre><code>git clone https://github.com/imfiver/CVE-2022-0847.git</code></pre><p><img src="https://raw.githubusercontent.com/virbellez/pigo/master/images/20220310110908.png" alt="20220310110908"></p><p>进入文件目录</p><pre><code>cd CVE-2022-0847</code></pre><p><img src="https://raw.githubusercontent.com/virbellez/pigo/master/images/20220310111112.png" alt="20220310111112"></p><p>查看下目录中内容</p><pre><code>ls</code></pre><p><img src="https://raw.githubusercontent.com/virbellez/pigo/master/images/20220310111203.png" alt="20220310111203"></p><p>运行Dirty-Pipe.sh文件</p><pre><code>bash Dirty-Pipe.sh</code></pre><p><img src="https://raw.githubusercontent.com/virbellez/pigo/master/images/20220310111254.png" alt="20220310111254"></p><p>可以看到已经进入root了，用whoami看看</p><pre><code>whoami</code></pre><p><img src="https://raw.githubusercontent.com/virbellez/pigo/master/images/20220310111336.png" alt="20220310111336"></p>]]></content>
     
     
-    <summary type="html">这个漏洞以其易用性，危害性，泛用性成为了2022年威胁最大的漏洞之一。我猜测它之后会成为之后五年最好用的提权漏洞之一（也许没有之一）。本文会描述该漏洞的利用方式和一部分原理。</summary>
+    <summary type="html">这个漏洞以其易用性，危害性，泛用性成为了2022年威胁最大的漏洞之一。我猜测它会成为之后五年最好用的提权漏洞之一（也许没有之一）。本文会描述该漏洞的利用方式和一部分原理。</summary>
     
     
     

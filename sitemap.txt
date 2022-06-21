@@ -1,5 +1,7 @@
-http://ciaofox.me/about/index.html
+http://ciaofox.me/2021/12/13/400%20Execution%20%E6%94%BB%E5%87%BB/%E9%9B%AA%E5%B4%A9-log4j%E6%BC%8F%E6%B4%9E%E7%B2%97%E8%B0%88/
 http://ciaofox.me/2022/03/10/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/DirtyPipe(CVE-2022-0847)/
+http://ciaofox.me/2022/06/16/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/DirtyPipe(CVE-2022-0847)/
+http://ciaofox.me/about/index.html
 http://ciaofox.me/2022/05/20/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/%E5%B0%91%E6%95%B0%E6%B4%BE%E6%8A%A5%E5%91%8A-%E5%85%B3%E4%BA%8E%E5%9B%BA%E4%BB%B6%EF%BC%8C%E7%AD%89%E4%BF%9D%E4%B8%8E%E5%AE%89%E5%85%A8/
 http://ciaofox.me/404.html
 http://ciaofox.me/404.html
@@ -29,7 +31,6 @@ http://ciaofox.me/2019/09/25/600%20Privilege%20Escalation%20%E6%9D%83%E9%99%90%E
 http://ciaofox.me/2019/10/11/400%20Execution%20%E6%94%BB%E5%87%BB/windows%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2019-0708%EF%BC%89/
 http://ciaofox.me/2019/09/22/400%20Execution%20%E6%94%BB%E5%87%BB/PHPMyWind%E5%AD%98%E5%82%A8XSS%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2017-12984%EF%BC%89/
 http://ciaofox.me/2020/03/03/400%20Execution%20%E6%94%BB%E5%87%BB/Apache%20Tomcat%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2020-1938%EF%BC%89/
-http://ciaofox.me/2021/12/13/400%20Execution%20%E6%94%BB%E5%87%BB/%E9%9B%AA%E5%B4%A9-log4j%E6%BC%8F%E6%B4%9E%E7%B2%97%E8%B0%88/
 http://ciaofox.me/2018/10/31/400%20Execution%20%E6%94%BB%E5%87%BB/%E6%B8%97%E9%80%8F%E8%AE%B0%E5%BD%95%E4%B9%8B%E8%B7%AF%E5%BE%84%E9%81%8D%E5%8E%86/
 http://ciaofox.me/tags/index.html
 http://ciaofox.me/categories/index.html

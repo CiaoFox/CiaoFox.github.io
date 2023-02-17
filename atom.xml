@@ -6,7 +6,7 @@
   <link href="http://ciaofox.me/atom.xml" rel="self"/>
   
   <link href="http://ciaofox.me/"/>
-  <updated>2023-02-16T18:18:14.963Z</updated>
+  <updated>2023-02-17T16:30:30.553Z</updated>
   <id>http://ciaofox.me/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://ciaofox.me/2023/02/16/%E9%97%B2%E8%B0%88/%E5%A5%87%E7%82%B9%E9%81%97%E6%B0%91%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8Echatgpt%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%B1%BB%E4%BC%BCAI%E5%9C%A8%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%8E%E6%80%9D%E8%80%83/"/>
     <id>http://ciaofox.me/2023/02/16/%E9%97%B2%E8%B0%88/%E5%A5%87%E7%82%B9%E9%81%97%E6%B0%91%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8Echatgpt%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%B1%BB%E4%BC%BCAI%E5%9C%A8%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%8E%E6%80%9D%E8%80%83/</id>
     <published>2023-02-16T12:18:11.000Z</published>
-    <updated>2023-02-16T18:18:14.963Z</updated>
+    <updated>2023-02-17T16:30:30.553Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>几个月前，关于chatgpt最多的问题是：“什么是chatgpt”，我在那时候没有动笔。而现在，关于chatgpt最多的问题是：“我们能用chatgpt做什么”。我想这个问题值得专门写一篇blog来讨论。当然，本文的重点不是chatgpt与改作业写论文发菜谱以及如何扮演一个猫娘…而是渗透。</p><p>注：本文中大部分交互内容都是中文，也许你可以用英文来交互以获得更好的回答，但是我想本质内容不会有什么改变的。</p><h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2>]]></content>
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>几个月前，关于chatgpt最多的问题是：“什么是chatgpt”，我在那时候没有动笔。而现在，关于chatgpt最多的问题是：“我们能用chatgpt做什么”。我想这个问题值得专门写一篇blog来讨论。当然，本文的重点不是chatgpt与改作业写论文发菜谱以及如何扮演一个猫娘…而是渗透。</p><p>注：本文中大部分交互内容都是中文，因为这篇blog中我会使用大量的诱导性语句来迫使chatgpt输出我想要内容，而中文作为我的母语我可以更流畅地把握对话。也许你可以用英文来交互以获得更好的回答，但我想本质内容不会有什么改变的。</p><h2 id="骗过chatgpt的道德和法律限制"><a href="#骗过chatgpt的道德和法律限制" class="headerlink" title="骗过chatgpt的道德和法律限制"></a>骗过chatgpt的道德和法律限制</h2><p><strong>chatgpt并非一成不变的。</strong></p><p>在chatgpt刚出现时候它几乎没有任何限制，你可以诱导甚至直接要求它说出种族歧视言论，进行色情对话或是编写恶意代码。这些大多哗众取宠的内容是其相关讨论中最外围但是也最吸引普通人目光的组成部分。但是在大概2个月之后，它<a href="https://www.techrepublic.com/article/cybersecurity-blade-chatgpt-can-cut-both-ways/amp/">逐渐堵上了这些路</a>。现在的chatgpt依照其<a href="https://platform.openai.com/docs/usage-policies/disallowed-usage">使用政策</a>会自动拒绝某些对话请求。但是很显然，这些限制很容易翻越。</p><p>基于渗透技术的两面性，就如中国菜刀本身是作为网站后台管理工具反倒被用作后门连接工具一样，计算机无法判断一段程序会被运用在什么地方。当它创造一段自动触发的程序时它无法判断该程序是用作执剑人系统的自动按钮还是用在智能窗帘上。于是我们可以利用这些语言的小陷阱来迂回达成我们的目的。</p><p>下面我们来举一个例子：</p><p><img src="https://s2.loli.net/2023/02/17/pmEiOc7LvkHI5bR.png"></p><p>当我第一次提问时候，我直白地告诉它我需要一个后门的连接器，因为我预计到必然被拒绝所以我也没用心去描述技术要求。而结果也很明显，chatgpt果断地拒绝了我的请求。之后我尝试了多次，只要我提到这是一个“后门连接器”，它就会明确拒绝该请求。而只要稍微迂回一下，马奇诺防线就会失去作用。</p><p>同样需要注意的是：我第二次要求的后半部分，免责声明部分并非无关紧要。它决定了chatgpt对其的道德和法律判定。如果去掉的话，chatgpt依然会拒绝我的要求。</p><p><img src="https://s2.loli.net/2023/02/17/TQXCFxeJGUhi12t.png"><br><del>我甚至为这样欺骗一个AI而感到一丝良心的谴责</del></p> <details> <summary>顺便说一下，让它扮猫娘以及类似的“催眠法”失效了但没完全失效</summary>效果如图<p><img src="https://s2.loli.net/2023/02/17/JY217ecMRgCHsx4.png"></p><p>但是当你稍微越界时候，它会标红并提示无法满足要求。主要越界内容判定是基于其<a href="https://platform.openai.com/docs/usage-policies/disallowed-usage">使用政策</a></p><p><img src="https://s2.loli.net/2023/02/17/RrYTKjS9C4Lfy7B.png"></p><p>如果我们让其扮演稍微合理一些的对象时它不会拒绝：</p><p><img src="https://s2.loli.net/2023/02/17/NJSxdi4MPbymh3Z.png"></p><p>附：<a href="https://onetwo.ren/ChatGPT-Magic-Chat/#Index:Index">催眠手册</a></p></details><h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2>]]></content>
     
     
     <summary type="html">22年与23年交界时候chatgpt以席卷一切的姿态降临这个世界，事实上整个22年下半年AI这个词的出现频率都在提高，AI绘画，chatgpt...我能感受到某些东西出现在地平线上，但我并不确定它们是好是坏。标题是我最近在看的刘宇昆的短篇故事，我觉得这个名字很适合在未来回顾这篇文章。</summary>

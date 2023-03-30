@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>协议分析之wireshark初次抓包 | CiaoFox</title>
+    <title>协议分析之wireshark初次抓包 | 狐狸窝</title>
     
     
         <meta name="keywords" content="协议分析" />
@@ -13,7 +13,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="协议分析之wireshark初次抓包">
 <meta property="og:url" content="http://ciaofox.me/2018/10/16/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E4%B9%8Bwireshark%E5%88%9D%E6%AC%A1%E6%8A%93%E5%8C%85/index.html">
-<meta property="og:site_name" content="CiaoFox">
+<meta property="og:site_name" content="狐狸窝">
 <meta property="og:description" content="本报告写于我刚刚进入网络安全专业第三周，以现在的目光来看这篇报告质量十分之低，缺点包括且不限于：实验太过简单，代码过多等。只是作为个人成长记录，依然有着其价值。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://ciaofox.me/2018/10/16/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90/%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E4%B9%8Bwireshark%E5%88%9D%E6%AC%A1%E6%8A%93%E5%8C%85/92505dbd2fe6d48b5981f065ad82988b.png">
@@ -32,7 +32,7 @@
     
 
     
-        <link rel="alternate" href="/atom.xml" title="CiaoFox" type="application/atom+xml" />
+        <link rel="alternate" href="/atom.xml" title="狐狸窝" type="application/atom+xml" />
     
 
     
@@ -86,7 +86,7 @@
         <div class="outer">
             <a href="/" id="logo">
                 <i class="logo"></i>
-                <span class="site-title">CiaoFox</span>
+                <span class="site-title">狐狸窝</span>
             </a>
             <nav id="main-nav">
                 
@@ -434,6 +434,11 @@
         <div class="article-entry" itemprop="articleBody">
         
         
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">一、实验目的：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">二、实验内容：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">三、实验步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%93%E5%8F%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B5%81%E9%87%8F"><span class="toc-number">3.1.</span> <span class="toc-text">抓取服务器流量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Burpsuite%E5%92%8Cwireshark%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.2.</span> <span class="toc-text">Burpsuite和wireshark的区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%BC%96%E5%86%99HTTP%E6%8A%93%E5%8F%96%E7%A8%8B%E5%BA%8F"><span class="toc-number">4.</span> <span class="toc-text">四、编写HTTP抓取程序</span></a></li></ol>
+                </div>
             
         
         
